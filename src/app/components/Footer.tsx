@@ -5,7 +5,7 @@ const Footer = () => (
   <footer className="bg-transparent mt-16">
     <div className="container border-t border-white/20 mx-auto flex flex-col gap-4 py-6">
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="flex gap-5 items-center text-sm text-white/75">
+        <div className="flex flex-col sm:flex-row gap-5 items-center text-sm text-white/75">
           <Link
             href="/"
             className="text-lg font-semibold text-white hover:text-gray-200 mt-0.5"
