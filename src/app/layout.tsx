@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Logoff - Find Your Focus",
-  description: "Mindfully manage your screen time and rediscover balance. Logoff helps you navigate your digital world with intention.",
+  description: "Logoff is your calm guide to managing screen time and building mindful digital habits.",
 };
 
 export default function RootLayout({

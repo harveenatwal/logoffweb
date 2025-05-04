@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @theme {
   --color-logoff-white: #FFFFFF;
@@ -11,6 +12,12 @@
   --color-logoff-star-purple: #C3B9F0;
   --color-logoff-star-blue: #A7C7E7;
   --color-logoff-star-yellow: #FFFACD;
+
+  --breakpoint-xs: 40rem; 
+  --breakpoint-md: 50rem; 
+  --breakpoint-lg: 65rem; 
+  --breakpoint-xl: 65rem; 
+  --breakpoint-2xl: 65rem; 
 }
 
 @layer base {
@@ -23,5 +30,12 @@
   body {
     color: rgb(var(--foreground-rgb));
     background: rgb(var(--background-start-rgb));
+  }
+
+  .space-background {
+    background-color: #2A2A2E; 
+    background-image:
+        linear-gradient(160deg, #2A2A2E 0%, #3a315b 50%, #4d3a7b 100%);
+    background-size: 100% 100%;
   }
 }
