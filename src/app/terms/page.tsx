@@ -1,5 +1,6 @@
-import Header from '@/app/components/Header';
-import Footer from '@/app/components/Footer';
+import Header from "@/app/components/Header";
+import Footer from "@/app/components/Footer";
+import "@/app/purple-body.css";
 
 export default function TermsPage() {
   return (
@@ -9,8 +10,13 @@ export default function TermsPage() {
       <main className="flex-1 py-12 md:py-16">
         <div className="container max-w-4xl mx-auto px-4">
           <div className="bg-white text-gray-800 rounded-lg shadow-lg p-6 md:p-10">
-            <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center">Terms of Use</h1>
-            <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: `
+            <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center">
+              Terms of Use
+            </h1>
+            <div
+              className="prose prose-lg max-w-none"
+              dangerouslySetInnerHTML={{
+                __html: `
               <p><strong>Last Updated:</strong> 03/23/2025</p>
               
               <p>We are committed to safeguarding your privacy. This policy applies to all products built and maintained by FocusPledge LLC including the mobile app:&nbsp;Logoff&nbsp;(all versions), previously named FocusPledge, the website: www.focuspledge.com, www.logoffapp.com, and related offerings and services.<br><br>When we say “Company”, “we”, “our”, "I", or “us” in this document, we are referring to FocusPledge LLC.<br><br>In this policy, we lay out: what data we collect and why; how your data is handled; and your rights with respect to your data. We promise we never sell your data: never have, never will.<br><br>This policy applies to our handling of information about site visitors, prospective customers, and customers and authorized users (in relation to their procurement of the services and management of their relationship with FocusPledge LLC). We refer collectively to these categories of individuals as "you" throughout this policy.</p>
@@ -46,12 +52,14 @@ export default function TermsPage() {
               <h2>Contact Us</h2>
               <p>If you have any questions or concerns about this privacy policy, please contact us at <a href="mailto:support@focuspledge.com">support@focuspledge.com</a>.</p>
               
-            ` }} />
+            `,
+              }}
+            />
           </div>
         </div>
       </main>
 
-      <Footer/>
+      <Footer />
     </div>
   );
 }
@@ -59,5 +67,6 @@ export default function TermsPage() {
 // Add basic metadata
 export const metadata = {
   title: "Terms of Service - Logoff",
-  description: "Read the Terms of Service for using the Logoff application and website.",
+  description:
+    "Read the Terms of Service for using the Logoff application and website.",
 };

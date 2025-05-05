@@ -1,5 +1,6 @@
-import Header from '@/app/components/Header';
-import Footer from '@/app/components/Footer';
+import Header from "@/app/components/Header";
+import Footer from "@/app/components/Footer";
+import "@/app/purple-body.css";
 
 export default function TermsPage() {
   return (
@@ -9,8 +10,13 @@ export default function TermsPage() {
       <main className="flex-1 py-12 md:py-16">
         <div className="container max-w-4xl mx-auto px-4">
           <div className="bg-white text-gray-800 rounded-lg shadow-lg p-6 md:p-10">
-            <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center">Refund Policy</h1>
-            <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: `
+            <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center">
+              Refund Policy
+            </h1>
+            <div
+              className="prose prose-lg max-w-none"
+              dangerouslySetInnerHTML={{
+                __html: `
               <p><strong>Last Updated:</strong> 03/23/2025</p>
               
               <p>We understand that things don't always go as planned. All payments, including in-app purchases, are processed through the App Store, and we don't have access to your payment details. This means we are unable to issue refunds directly.</p>
@@ -37,12 +43,14 @@ export default function TermsPage() {
               <h2>Contact Us</h2>
               <p>If you have any questions or concerns about this policy, please contact us at <a href="mailto:support@focuspledge.com">support@focuspledge.com</a>.</p>
               
-            ` }} />
+            `,
+              }}
+            />
           </div>
         </div>
       </main>
 
-      <Footer/>
+      <Footer />
     </div>
   );
 }
