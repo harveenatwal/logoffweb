@@ -1,8 +1,8 @@
-"use client"; // Directive indicating this component runs on the client-side
+"use client";
 
 import React from "react";
 import { FiShare } from "react-icons/fi";
-import { toast, Toaster } from "sonner";
+import { toast } from "sonner";
 
 /**
  * A button component that copies the current page's URL to the clipboard
@@ -39,7 +39,6 @@ const ShareButton = () => {
       aria-label="Copy page link to clipboard" // Accessibility improvement
     >
       <FiShare className="w-4 h-4" />
-      <div>Share</div>
     </button>
   );
 };

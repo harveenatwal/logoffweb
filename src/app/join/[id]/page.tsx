@@ -1,69 +1,27 @@
-import { db } from "@/lib/firebase";
-import {
-  doc,
-  getDoc,
-  collection,
-  getCountFromServer,
-} from "firebase/firestore";
+export const runtime = "edge";
+
+import { createClient } from "@/lib/supabase/server";
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
-import { notFound } from "next/navigation";
+import {
+  decodeSessionData,
+  getChallengeRules,
+  getSessionDetails,
+} from "./utils";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import "./styles.css";
 import ShareButton from "./share";
-import {
-  Challenge,
-  decodeSessionData,
-  getChallengeRules,
-  getSessionDetails,
-} from "./utils";
 
-async function getChallengeData(id: string): Promise<Challenge | null> {
-  const docRef = doc(db, "challenges", id);
-  try {
-    const docSnap = await getDoc(docRef);
+import "./styles.css";
+import { notFound } from "next/navigation";
 
-    if (docSnap.exists()) {
-      return docSnap.data() as Challenge;
-    } else {
-      console.log("No such document!");
-      return null;
-    }
-  } catch (error) {
-    console.error("Error fetching challenge data:", error);
-    return null;
-  }
-}
-
-async function getParticipantCount(challengeId: string): Promise<number> {
-  const participantsCollection = collection(
-    db,
-    "challenges",
-    challengeId,
-    "participants"
-  );
-  const snapshot = await getCountFromServer(participantsCollection);
-  if (snapshot) {
-    return snapshot.data().count;
-  } else {
-    return 0;
-  }
-}
-
-interface JoinPageProps {
-  params: {
-    id: string;
-  };
-}
-
-const DownloadAppButton = () => (
+const DownloadAppButton = ({ id }: { id: string }) => (
   <a
-    href="https://apps.apple.com/us/app/logoff-app-blocker/id6670452224"
+    href={`https://logoffapp.onelink.me/mmwN?af_xp=custom&pid=challenge&c=challenge&deep_link_value=${id}`}
     className="inline-flex items-center bg-black text-white py-3 px-6 font-semibold rounded-lg hover:bg-gray-800 transition-colors duration-300 ease-in-out shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
   >
     <svg
@@ -78,26 +36,32 @@ const DownloadAppButton = () => (
   </a>
 );
 
-const JoinPage = async ({ params }: JoinPageProps) => {
-  const { id } = params;
+const JoinPage = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const challengeId = (await params).id;
+  const supabase = await createClient();
 
-  const challengeData = await getChallengeData(id);
-  if (!challengeData || challengeData.endDate.toMillis() < Date.now()) {
+  const {
+    data: challenge,
+    error,
+    status,
+  } = await supabase.from("challenges").select().eq("id", challengeId).single();
+
+  if ((error && status !== 406) || !challenge) {
     notFound();
-    return <div>Challenge not found.</div>;
   }
 
-  const session = decodeSessionData(challengeData.sessionData);
-  const participantCount = await getParticipantCount(id);
+  const session = decodeSessionData(challenge.session_data);
   const sessionDetails = getSessionDetails(session);
-  const rules = getChallengeRules(challengeData, session);
+  const rules = getChallengeRules(challenge, session);
 
   return (
     <div className="min-h-screen flex flex-col light-background">
       <Header light />
-      <main className="flex-1 flex pt-20">
+      <main className="flex-1 flex pt-20 justify-center">
         <div className="container mx-auto px-6">
+          {/* --- Navigation --- */}
           <nav className="border-b border-gray-200 mb-12">
+            {/* ... (rest of your nav code) ... */}
             <div className="flex justify-between items-center max-w-7xl mx-auto">
               <div className="flex space-x-4 sm:space-x-6 text-sm py-4 text-secondary-light font-medium">
                 <a href="#about">About</a>
@@ -105,83 +69,56 @@ const JoinPage = async ({ params }: JoinPageProps) => {
                 <a href="#how-it-works">How it works</a>
                 <a href="#faq">FAQ</a>
               </div>
-
               <div>
                 <ShareButton />
               </div>
             </div>
           </nav>
 
+          {/* --- Main Content Area --- */}
           <div className="flex flex-col md:flex-row gap-12 sm:gap-24">
+            {/* --- Left Column (Sticky Info) --- */}
             <div className="w-full md:w-2/5 text-center md:text-left">
               <div className="sticky top-28">
                 <h1 className="text-5xl font-serif font-medium text-center text-primary-light mb-8">
-                  {challengeData.name}
+                  {challenge.name} {/* Use state data */}
                 </h1>
-
                 <div className="flex justify-center items-center text-sm text-tertiary-light mb-4">
                   <div className="flex items-center space-x-1">
+                    {/* Use state data & safe formatting */}
                     <span>
-                      Ends on {challengeData.endDate.toDate().toDateString()}
+                      Ends on {new Date(challenge.end_date).toDateString()}
                     </span>
                   </div>
                 </div>
-
-                <div>
-                  {/* <img
-                    className="w-full h-auto object-cover rounded-2xl"
-                    src="https://placehold.co/600x400/cccccc/666666?text=."
-                  /> */}
-                </div>
+                {/* Image placeholder */}
               </div>
             </div>
 
+            {/* --- Right Column (Details) --- */}
             <div className="w-full md:w-3/5 relative flex flex-col gap-8">
-              <div id="about" className="flex flex-col gap-2">
+              {/* --- About Section --- */}
+              <div id="about" className="flex flex-col gap-2 text-center">
                 <div className="text-secondary-light font-serif text-xl">
                   Hosted by
                 </div>
-                <div className="text-primary-light font-serif text-xl flex gap-4 items-center">
-                  {/* <img
-                    className="w-11 h-11 rounded-full object-cover"
-                    src="https://placehold.co/600x400/cccccc/666666?text=."
-                    alt="Host Avatar"
-                  /> */}
-                  <div>JustAli</div>
-                </div>
+                <div className="text-primary-light font-serif text-xl">
+                  JustAli
+                </div>{" "}
+                {/* Placeholder Host */}
                 <div className="text-secondary-light mt-1">
-                  {challengeData.description}
+                  {challenge.description} {/* Use state data */}
                 </div>
-                <div className="mt-4 flex items-center justify-between">
+                <div className="mt-4 flex items-center justify-center">
                   <div>
-                    <DownloadAppButton />
+                    <DownloadAppButton id={challengeId} />
                   </div>
-                  <div className="flex flex-col items-end gap-1">
-                    <div className="flex">
-                      {/* <img
-                        className="w-7 h-7 -mx-1 outline outline-white rounded-full object-cover"
-                        src="https://placehold.co/600x400/cccccc/666666?text=."
-                        alt="Host Avatar"
-                      />
-                      <img
-                        className="w-7 h-7 -mx-1 outline outline-white rounded-full object-cover"
-                        src="https://placehold.co/600x400/cccccc/666666?text=."
-                        alt="Host Avatar"
-                      />
-                      <img
-                        className="w-7 h-7 -mx-1 outline outline-white rounded-full object-cover"
-                        src="https://placehold.co/600x400/cccccc/666666?text=."
-                        alt="Host Avatar"
-                      /> */}
-                    </div>
-                    {participantCount > 3 && (
-                      <div className="text-tertiary-light text-sm">
-                        {participantCount} joined
-                      </div>
-                    )}
-                  </div>
+                  {/* Participant count display (use state if fetched) */}
+                  {/* {participantCount > 0 && <div>{participantCount} joined</div>} */}
                 </div>
               </div>
+
+              {/* --- Blocking Rule Section --- */}
               <div
                 id="challenge"
                 className="border-t border-gray-200 pt-8 flex flex-col gap-6"
@@ -191,10 +128,11 @@ const JoinPage = async ({ params }: JoinPageProps) => {
                 </div>
                 <div>
                   <div className="text-sm text-secondary-light">
-                    {sessionDetails.description}
+                    {sessionDetails.description} {/* Use derived data */}
                   </div>
                 </div>
                 <div className="grid grid-cols-3 gap-3">
+                  {/* Use derived data */}
                   {Array.from(rules).map(([key, value]) => (
                     <div key={key}>
                       <div className="text-xs text-tertiary-light">{key}</div>
@@ -203,10 +141,13 @@ const JoinPage = async ({ params }: JoinPageProps) => {
                   ))}
                 </div>
               </div>
+
+              {/* --- How it Works Section --- */}
               <div
                 id="how-it-works"
                 className="border-t border-gray-200 pt-8 flex flex-col gap-6"
               >
+                {/* ... (static content) ... */}
                 <div className="text-primary-light font-serif text-xl">
                   How challenges work on Logoff
                 </div>
@@ -218,6 +159,8 @@ const JoinPage = async ({ params }: JoinPageProps) => {
                   challenge period!
                 </div>
               </div>
+
+              {/* --- FAQ Section --- */}
               <div
                 id="faq"
                 className="border-t border-gray-200 pt-8 flex flex-col gap-6"
@@ -225,6 +168,7 @@ const JoinPage = async ({ params }: JoinPageProps) => {
                 <div className="text-primary-light font-serif text-xl">
                   Frequently asked questions
                 </div>
+                {/* Using ShadCN Accordion */}
                 <Accordion type="single" collapsible className="w-full">
                   <AccordionItem value="item-1">
                     <AccordionTrigger>
@@ -252,14 +196,13 @@ const JoinPage = async ({ params }: JoinPageProps) => {
                   </AccordionItem>
                 </Accordion>
                 <div>
-                  <DownloadAppButton />
+                  <DownloadAppButton id={challengeId} />
                 </div>
               </div>
             </div>
           </div>
         </div>
       </main>
-
       <Footer light />
     </div>
   );

@@ -1,5 +1,4 @@
-import { Bytes } from "firebase/firestore";
-import { Timestamp } from "firebase/firestore";
+import { Tables } from "@/lib/supabase/database.types";
 
 interface TimeComponents {
   second: number;
@@ -46,15 +45,6 @@ export interface Session {
   friction: Friction;
   activitySelection: unknown;
   locationType: LocationType;
-}
-
-export interface Challenge {
-  id: string;
-  name: string;
-  description: string | null;
-  endDate: Timestamp;
-  createdAt: Timestamp;
-  sessionData: Bytes;
 }
 
 function formattedTimeLimit(timeLimit: TimeComponents): string {
@@ -293,7 +283,7 @@ export function getSessionDetails(session: Session | null): {
  * Keys are based on the example markup labels.
  */
 export function getChallengeRules(
-  challenge: Challenge,
+  challenge: Tables<"challenges">,
   session: Session | null
 ): Map<string, string> {
   const rules = new Map<string, string>();
@@ -301,8 +291,16 @@ export function getChallengeRules(
     return rules;
   }
 
-  const startDate = challenge.createdAt.toDate().toDateString();
-  const endDate = challenge.endDate.toDate().toDateString();
+  const startDate = new Date(challenge.created_at).toLocaleDateString("en-US", {
+    month: "long",
+    day: "2-digit",
+    year: "numeric",
+  });
+  const endDate = new Date(challenge.end_date).toLocaleDateString("en-US", {
+    month: "long",
+    day: "2-digit",
+    year: "numeric",
+  });
 
   // Rule: Action
   // const actionStr = formatAction(session.friction);
@@ -381,35 +379,87 @@ export function getChallengeRules(
   return rules;
 }
 
-/**
- * Decodes the Firebase Bytes object containing session data into a Session object.
- * Assumes the Bytes object contains a UTF-8 encoded JSON string.
- *
- * @param sessionData - The Firebase Bytes object to decode.
- * @returns The parsed Session object, or null if decoding fails.
- */
-export function decodeSessionData(sessionData: Bytes): Session | null {
-  try {
-    // 1. Convert Firebase Bytes to a Uint8Array
-    const uint8Array = sessionData.toUint8Array();
-
-    // 2. Decode the Uint8Array into a UTF-8 string
-    // TextDecoder is standard in modern browsers and Node.js (v11+)
-    const jsonString = new TextDecoder().decode(uint8Array);
-
-    // 3. Parse the JSON string into a JavaScript object
-    const parsedData = JSON.parse(jsonString);
-
-    // 4. Return the parsed data, casting it to the Session interface.
-    //    Note: This is a type assertion. For robustness, you might add
-    //    runtime validation to ensure parsedData actually matches the Session structure.
-    return parsedData as Session;
-  } catch (error) {
-    console.error("Failed to decode sessionData:", error);
+export function decodeSessionData(
+  sessionDataHexString: string | null
+): Session | null {
+  if (!sessionDataHexString || typeof sessionDataHexString !== "string") {
     console.error(
-      "Original Bytes data (might be truncated):",
-      sessionData.toString().substring(0, 200)
-    ); // Log part of the raw data for debugging
-    return null; // Return null or throw the error, depending on desired behavior
+      "Invalid sessionDataHexString: input is null or not a string"
+    );
+    return null;
+  }
+
+  try {
+    // 1. Hex String to Uint8Array (binary data)
+    let hex = sessionDataHexString;
+    if (hex.startsWith("\\x")) {
+      hex = hex.substring(2);
+    } else if (hex.startsWith("0x")) {
+      hex = hex.substring(2);
+    }
+
+    if (hex.length % 2 !== 0) {
+      console.error("Invalid hex string: odd length after removing prefix.");
+      return null;
+    }
+
+    const bytes = new Uint8Array(hex.length / 2);
+    for (let i = 0; i < hex.length; i += 2) {
+      const byte = parseInt(hex.substring(i, i + 2), 16);
+      if (isNaN(byte)) {
+        console.error(
+          "Invalid hex character encountered:",
+          hex.substring(i, i + 2)
+        );
+        return null;
+      }
+      bytes[i / 2] = byte;
+    }
+
+    // 2. Uint8Array (binary data) to a string.
+    // This string is now expected to be a Base64 encoded representation of the actual JSON.
+    const base64EncodedJsonString = new TextDecoder().decode(bytes);
+
+    // 3. Base64 decode this string to get the actual JSON string.
+    // `atob()` is used for Base64 decoding in browsers and Node.js (>= v16.0.0).
+    // For older Node.js versions, you might need `Buffer.from(base64EncodedJsonString, 'base64').toString('utf8')`.
+    let actualJsonString: string;
+    if (typeof atob === "function") {
+      actualJsonString = atob(base64EncodedJsonString);
+    } else if (typeof Buffer === "function") {
+      // For Node.js environments
+      actualJsonString = Buffer.from(
+        base64EncodedJsonString,
+        "base64"
+      ).toString("utf8");
+    } else {
+      console.error(
+        "Base64 decoding (atob) not available in this environment."
+      );
+      return null;
+    }
+
+    // 4. JSON String to TypeScript Object
+    const sessionObject = JSON.parse(actualJsonString);
+
+    // 5. Type assertion/validation (basic)
+    return sessionObject as Session;
+  } catch (error) {
+    console.error("Error decoding session data:", error);
+    if (error instanceof SyntaxError) {
+      // This error would now likely occur if actualJsonString is still not valid JSON
+      console.error(
+        "Failed to parse JSON string. Original string (after Base64 decode) might be corrupted or not JSON."
+      );
+    } else if (
+      typeof DOMException !== "undefined" &&
+      error instanceof DOMException &&
+      (error.name === "InvalidCharacterError" ||
+        error.message.includes(" небезопасный символ"))
+    ) {
+      // Error from atob() if the string is not valid Base64
+      console.error("The decoded hex string was not valid Base64");
+    }
+    return null;
   }
 }

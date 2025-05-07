@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": [
+          "A69KM4464Q.com.focuspledge.FocusPledgeApp"
+        ],
+        "paths": [
+          "/join/*"
+        ]
+      }
+    ]
+  }
+}
