@@ -20,6 +20,7 @@ import "./styles.css";
 import { notFound } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getAvatarPublicUrl } from "@/lib/supabaseUtils";
+import { Metadata } from "next";
 
 const DownloadAppButton = ({ id }: { id: string }) => (
   <a
@@ -37,6 +38,66 @@ const DownloadAppButton = ({ id }: { id: string }) => (
     Download the app to join
   </a>
 );
+
+type Props = {
+  params: { id: string };
+  // searchParams: { [key: string]: string | string[] | undefined }; // Not used here but available
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const challengeId = await params.id;
+  const supabase = await createClient();
+
+  // Fetch only the data needed for metadata to be efficient
+  const { data: challenge, error } = await supabase
+    .from("challenges")
+    .select(
+      `
+      name,
+      host_profile:profiles (
+        full_name
+      )
+    `
+    )
+    .eq("id", challengeId)
+    .single();
+
+  if (error || !challenge) {
+    // Handle case where challenge is not found or an error occurs
+    console.error(
+      `Error fetching challenge ${challengeId} for metadata:`,
+      error
+    );
+    return {
+      title: "Challenge Not Found | Logoff",
+      description:
+        "The challenge you are looking for could not be found. Explore other challenges on Logoff.",
+    };
+  }
+
+  // Use actual field names from your tables
+  const challengeName = challenge.name || "This Challenge"; // Fallback if name is null
+  const hostName = challenge.host_profile?.full_name || "A Logoff User"; // Fallback
+
+  const pageTitle = `${challengeName} by ${hostName} | Logoff`;
+  const pageDescription = `You're invited to join '${challengeName}', hosted by ${hostName} on Logoff. Master screen time, unlock deeper focus, and achieve your goals together.`;
+
+  return {
+    title: pageTitle,
+    description: pageDescription,
+    openGraph: {
+      title: pageTitle,
+      description: pageDescription,
+      url: `/join/${challengeId}`, // Canonical URL for this page
+      siteName: "Logoff",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: pageTitle,
+      description: pageDescription,
+    },
+  };
+}
 
 const JoinPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const challengeId = (await params).id;
@@ -62,7 +123,7 @@ const JoinPage = async ({ params }: { params: Promise<{ id: string }> }) => {
 
   const initials = challenge.host_profile?.full_name
     ?.split(" ")
-    ?.map((word) => word[0])
+    ?.map((word: string) => word[0])
     ?.join("")
     ?.toUpperCase();
 

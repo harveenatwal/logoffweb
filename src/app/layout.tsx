@@ -14,11 +14,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Logoff - Social Screen Time",
+  title: "Logoff - Social App Blocker",
   description:
     "Master screen time and unlock deeper focus, together. Invite friends, join group challenges, and support each other.",
   openGraph: {
-    title: "Logoff - Social Screen Time",
+    title: "Logoff - Social App Blocker",
     description:
       "Master screen time and unlock deeper focus, together. Invite friends, join group challenges, and support each other.",
     url: "https://www.logoffapp.com",
