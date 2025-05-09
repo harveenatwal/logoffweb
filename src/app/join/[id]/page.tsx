@@ -18,6 +18,8 @@ import ShareButton from "./share";
 
 import "./styles.css";
 import { notFound } from "next/navigation";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { getAvatarPublicUrl } from "@/lib/supabaseUtils";
 
 const DownloadAppButton = ({ id }: { id: string }) => (
   <a
@@ -44,7 +46,11 @@ const JoinPage = async ({ params }: { params: Promise<{ id: string }> }) => {
     data: challenge,
     error,
     status,
-  } = await supabase.from("challenges").select().eq("id", challengeId).single();
+  } = await supabase
+    .from("challenges")
+    .select("*, host_profile:profiles (*)")
+    .eq("id", challengeId)
+    .single();
 
   if ((error && status !== 406) || !challenge) {
     notFound();
@@ -53,6 +59,17 @@ const JoinPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const session = decodeSessionData(challenge.session_data);
   const sessionDetails = getSessionDetails(session);
   const rules = getChallengeRules(challenge, session);
+
+  const initials = challenge.host_profile?.full_name
+    ?.split(" ")
+    ?.map((word) => word[0])
+    ?.join("")
+    ?.toUpperCase();
+
+  const avatarUrl = getAvatarPublicUrl(
+    supabase,
+    challenge.host_profile?.avatar_url
+  );
 
   return (
     <div className="min-h-screen flex flex-col light-background">
@@ -98,12 +115,19 @@ const JoinPage = async ({ params }: { params: Promise<{ id: string }> }) => {
             {/* --- Right Column (Details) --- */}
             <div className="w-full md:w-3/5 relative flex flex-col gap-8">
               {/* --- About Section --- */}
-              <div id="about" className="flex flex-col gap-2 text-center">
+              <div
+                id="about"
+                className="flex flex-col gap-2 text-center items-center"
+              >
+                <Avatar className="size-20">
+                  {avatarUrl && <AvatarImage src={avatarUrl} alt={initials} />}
+                  <AvatarFallback>{initials}</AvatarFallback>
+                </Avatar>
                 <div className="text-secondary-light font-serif text-xl">
                   Hosted by
                 </div>
                 <div className="text-primary-light font-serif text-xl">
-                  JustAli
+                  {challenge.host_profile?.full_name}
                 </div>{" "}
                 {/* Placeholder Host */}
                 <div className="text-secondary-light mt-1">
