@@ -45,7 +45,7 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const challengeId = await params.id;
+  const challengeId = (await params).id;
   const supabase = await createClient();
 
   // Fetch only the data needed for metadata to be efficient
