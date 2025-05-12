@@ -90,6 +90,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: pageDescription,
       url: `/join/${challengeId}`, // Canonical URL for this page
       siteName: "Logoff",
+      images: [
+        {
+          url: "https://cdn.logoffapp.com/opengraph.png",
+          width: 1200,
+          height: 600,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
