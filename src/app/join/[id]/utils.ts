@@ -291,62 +291,33 @@ export function getChallengeRules(
     return rules;
   }
 
-  const startDate = new Date(challenge.created_at).toLocaleDateString("en-US", {
-    month: "long",
-    day: "2-digit",
-    year: "numeric",
-  });
-  const endDate = new Date(challenge.end_date).toLocaleDateString("en-US", {
-    month: "long",
-    day: "2-digit",
-    year: "numeric",
-  });
-
   // Rule: Action
   // const actionStr = formatAction(session.friction);
   // const maxOpens = session.maxOpens.toString()
 
   if (session.type["timer"]) {
     rules.set("Type", "Focus now");
-    rules.set("Starts on", startDate);
-    rules.set("Ends on", endDate);
     rules.set(
       "Duration",
       getFormattedDuration(
         getDuration(session.startTimeComponents, session.endTimeComponents)
       )
     );
-    rules.set(
-      "Start time",
-      formatTimeFromComponents(session.startTimeComponents)
-    );
-    rules.set("End time", formatTimeFromComponents(session.endTimeComponents));
   }
 
   if (session.type["schedule"]) {
     rules.set("Type", "Schedule");
-    rules.set("Starts on", startDate);
-    rules.set("Ends on", endDate);
-    rules.set(
-      "Start time",
-      formatTimeFromComponents(session.startTimeComponents)
-    );
-    rules.set("End time", formatTimeFromComponents(session.endTimeComponents));
     rules.set("Days active", formatDays(session.repeatsOn));
   }
 
   if (session.type["appLimit"]) {
     rules.set("Type", "App Time Limit");
-    rules.set("Starts on", startDate);
-    rules.set("Ends on", endDate);
     rules.set("Time limit", formattedTimeLimit(session.timeLimit));
     rules.set("Days active", formatDays(session.repeatsOn));
   }
 
   if (session.type["challenge"]) {
     rules.set("Type", "Action");
-    rules.set("Starts on", startDate);
-    rules.set("Ends on", endDate);
     rules.set("Time limit", formattedTimeLimit(session.timeLimit));
     rules.set("Action", formatAction(session.friction));
     rules.set("Days active", formatDays(session.repeatsOn));
@@ -354,8 +325,6 @@ export function getChallengeRules(
 
   if (session.type["appLock"]) {
     rules.set("Type", "App Open Limit");
-    rules.set("Starts on", startDate);
-    rules.set("Ends on", endDate);
     rules.set("Max opens", session.maxOpens.toString());
     rules.set("Stay open for", formattedTimeLimit(session.stayOpenFor));
     rules.set("Days active", formatDays(session.repeatsOn));
@@ -363,8 +332,6 @@ export function getChallengeRules(
 
   if (session.type["cooldown"]) {
     rules.set("Type", "Cooldown");
-    rules.set("Starts on", startDate);
-    rules.set("Ends on", endDate);
     rules.set("Time limit", formattedTimeLimit(session.timeLimit));
     rules.set("Cooldown", formattedTimeLimit(session.cooldown));
     rules.set("Days active", formatDays(session.repeatsOn));
@@ -372,8 +339,6 @@ export function getChallengeRules(
 
   if (session.type["adult"]) {
     rules.set("Type", "Adult Block");
-    rules.set("Starts on", startDate);
-    rules.set("Ends on", endDate);
   }
 
   return rules;

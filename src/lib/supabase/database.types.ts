@@ -34,6 +34,42 @@ export type Database = {
   };
   public: {
     Tables: {
+      challenge_participants: {
+        Row: {
+          challenge_id: string;
+          id: number;
+          joined_at: string;
+          profile_id: string;
+        };
+        Insert: {
+          challenge_id: string;
+          id?: number;
+          joined_at?: string;
+          profile_id: string;
+        };
+        Update: {
+          challenge_id?: string;
+          id?: number;
+          joined_at?: string;
+          profile_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "challenge_participants_challenge_id_fkey";
+            columns: ["challenge_id"];
+            isOneToOne: false;
+            referencedRelation: "challenges";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "challenge_participants_profile_id_fkey";
+            columns: ["profile_id"];
+            isOneToOne: false;
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          }
+        ];
+      };
       challenges: {
         Row: {
           created_at: string;
@@ -43,6 +79,7 @@ export type Database = {
           id: string;
           name: string;
           session_data: string | null;
+          start_date: string;
         };
         Insert: {
           created_at?: string;
@@ -52,6 +89,7 @@ export type Database = {
           id?: string;
           name: string;
           session_data?: string | null;
+          start_date?: string;
         };
         Update: {
           created_at?: string;
@@ -61,6 +99,7 @@ export type Database = {
           id?: string;
           name?: string;
           session_data?: string | null;
+          start_date?: string;
         };
         Relationships: [
           {
@@ -110,7 +149,20 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
-      [_ in never]: never;
+      get_profile_challenge_list: {
+        Args: { profile_id: string };
+        Returns: {
+          id: number;
+          joined_at: string;
+          challenge_id: string;
+          start_date: string;
+          end_date: string;
+          challenge_name: string;
+          host_name: string;
+          host_avatar_url: string;
+          participant_count: number;
+        }[];
+      };
     };
     Enums: {
       [_ in never]: never;

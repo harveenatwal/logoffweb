@@ -169,11 +169,20 @@ const JoinPage = async ({ params }: { params: Promise<{ id: string }> }) => {
                   {challenge.name} {/* Use state data */}
                 </h1>
                 <div className="flex justify-center items-center text-sm text-tertiary-light mb-4">
-                  <div className="flex items-center space-x-1">
-                    {/* Use state data & safe formatting */}
-                    <span>
-                      Ends on {new Date(challenge.end_date).toDateString()}
-                    </span>
+                  <div className="flex items-center space-x-4">
+                    <div className="flex items-center justify-center flex-col">
+                      <div>{new Date(challenge.start_date).toDateString()}</div>
+                      <div>
+                        {new Date(challenge.start_date).toLocaleTimeString()}
+                      </div>
+                    </div>
+                    <div>→</div>
+                    <div className="flex items-center justify-center flex-col">
+                      <div>{new Date(challenge.end_date).toDateString()}</div>
+                      <div>
+                        {new Date(challenge.end_date).toLocaleTimeString()}
+                      </div>
+                    </div>
                   </div>
                 </div>
                 {/* Image placeholder */}
