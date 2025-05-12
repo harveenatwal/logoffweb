@@ -112,35 +112,6 @@ function formatDays(repeatsOn: boolean[]): string {
   return result;
 }
 
-function formatTimeFromComponents(timeComponents: TimeComponents): string {
-  // Create a Date object using today's date but the specified time components.
-  // The date part (year, month, day) is arbitrary but needed for the Date object.
-  const now = new Date();
-  const date = new Date(
-    now.getFullYear(),
-    now.getMonth(),
-    now.getDate(),
-    timeComponents.hour,
-    timeComponents.minute,
-    timeComponents.second
-  );
-
-  // Default formatting options if none are provided: typically hour and minute
-  // This usually corresponds to "short" time style in formatters.
-  const defaultOptions: Intl.DateTimeFormatOptions = {
-    hour: "numeric", // e.g., '5' or '17' depending on locale/options
-    minute: "2-digit", // e.g., '30', '05'
-    // second: '2-digit' // Add this if you want seconds by default
-  };
-
-  // Use provided options or fall back to default options
-  const effectiveOptions = defaultOptions;
-
-  // Use toLocaleTimeString for locale-aware formatting
-  // It internally uses Intl.DateTimeFormat
-  return date.toLocaleTimeString("en-US", effectiveOptions);
-}
-
 function getDuration(
   startTimeComponents: TimeComponents,
   endTimeComponents: TimeComponents
