@@ -40,7 +40,7 @@ const DownloadAppButton = ({ id }: { id: string }) => (
 );
 
 type Props = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
   // searchParams: { [key: string]: string | string[] | undefined }; // Not used here but available
 };
 
