@@ -15,6 +15,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import ShareButton from "./share";
+import DateDisplay from "./DateDisplay";
 
 import "./styles.css";
 import { notFound } from "next/navigation";
@@ -168,23 +169,10 @@ const JoinPage = async ({ params }: { params: Promise<{ id: string }> }) => {
                 <h1 className="text-5xl font-serif font-medium text-center text-primary-light mb-8">
                   {challenge.name} {/* Use state data */}
                 </h1>
-                <div className="flex justify-center items-center text-sm text-tertiary-light mb-4">
-                  <div className="flex items-center space-x-4">
-                    <div className="flex items-center justify-center flex-col">
-                      <div>{new Date(challenge.start_date).toDateString()}</div>
-                      <div>
-                        {new Date(challenge.start_date).toLocaleTimeString()}
-                      </div>
-                    </div>
-                    <div>→</div>
-                    <div className="flex items-center justify-center flex-col">
-                      <div>{new Date(challenge.end_date).toDateString()}</div>
-                      <div>
-                        {new Date(challenge.end_date).toLocaleTimeString()}
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <DateDisplay 
+                  startDate={challenge.start_date} 
+                  endDate={challenge.end_date} 
+                />
                 {/* Image placeholder */}
               </div>
             </div>
