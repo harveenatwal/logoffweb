@@ -183,6 +183,21 @@ function formatAction(friction: Friction): string {
   return "None";
 }
 
+function formatTimeComponents(timeComponents: TimeComponents): string {
+  const hour = timeComponents.hour ?? 0;
+  const minute = timeComponents.minute ?? 0;
+
+  // Create a date object with the time to leverage browser's locale formatting
+  const date = new Date();
+  date.setHours(hour, minute, 0, 0);
+
+  return date.toLocaleTimeString([], {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  });
+}
+
 // --- Main Function ---
 
 export function getSessionDetails(session: Session | null): {
@@ -262,6 +277,9 @@ export function getChallengeRules(
     return rules;
   }
 
+  // Add session name first
+  rules.set("Name", session.name);
+
   // Rule: Action
   // const actionStr = formatAction(session.friction);
   // const maxOpens = session.maxOpens.toString()
@@ -279,6 +297,11 @@ export function getChallengeRules(
   if (session.type["schedule"]) {
     rules.set("Type", "Schedule");
     rules.set("Days active", formatDays(session.repeatsOn));
+
+    const startTime = formatTimeComponents(session.startTimeComponents);
+    const endTime = formatTimeComponents(session.endTimeComponents);
+
+    rules.set("Active time", `${startTime} - ${endTime}`);
   }
 
   if (session.type["appLimit"]) {
