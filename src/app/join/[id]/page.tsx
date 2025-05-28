@@ -24,7 +24,7 @@ import { Metadata } from "next";
 
 const DownloadAppButton = ({ id }: { id: string }) => (
   <a
-    href={`https://logoffapp.onelink.me/mmwN?af_xp=custom&pid=challenge&c=challenge&deep_link_value=https://logoffapp.com/join/${id}`}
+    href={`https://logoffapp.onelink.me/mmwN?af_xp=custom&pid=challenge&c=${id}&deep_link_value=https://logoffapp.com/join/${id}`}
     className="inline-flex items-center bg-black text-white py-3 px-6 font-semibold rounded-lg hover:bg-gray-800 transition-colors duration-300 ease-in-out shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
   >
     <svg
