@@ -4,7 +4,7 @@
 .carouselWrapper {
   height: 240px;
   width: 100%;
-  perspective: 500px;
+  /* perspective is now applied dynamically via inline styles */
   user-select: none;
   touch-action: none;
 }

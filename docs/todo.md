@@ -91,25 +91,25 @@ This checklist outlines all the necessary steps to build the responsive 3D persp
 
 ## Phase 5: Responsiveness
 
-- [ ] **Create Custom Responsive Hook**
+- [x] **Create Custom Responsive Hook** ✅ COMPLETED
 
-  - [ ] Create a new file `hooks/useResponsiveCarousel.ts`.
-  - [ ] Implement the hook using `useState`, `useEffect`, and `window.matchMedia`.
-  - [ ] Define breakpoints for "Phone," "MacBook," and "Studio Display."
-  - [ ] The hook should return an object containing the appropriate `perspective` and `translateZ` values for the current breakpoint.
-  - [ ] Ensure the hook adds and cleans up window resize event listeners properly.
+  - [x] Create a new file `hooks/useResponsiveCarousel.ts`.
+  - [x] Implement the hook using `useState`, `useEffect`, and `window.matchMedia`.
+  - [x] Define breakpoints for "Phone," "MacBook," and "Studio Display."
+  - [x] The hook should return an object containing the appropriate `perspective` and `translateZ` values for the current breakpoint.
+  - [x] Ensure the hook adds and cleans up window resize event listeners properly.
 
-- [ ] **Integrate Responsive Values**
+- [x] **Integrate Responsive Values** ✅ COMPLETED
 
-  - [ ] Import and call the `useResponsiveCarousel` hook in the main component.
-  - [ ] Apply the dynamic `perspective` value to the `.carouselWrapper` style.
-  - [ ] Update the dynamic `translateZ` value in the inline style for each `.arm`.
+  - [x] Import and call the `useResponsiveCarousel` hook in the main component.
+  - [x] Apply the dynamic `perspective` value to the `.carouselWrapper` style.
+  - [x] Update the dynamic `translateZ` value in the inline style for each `.arm`.
 
-- [ ] **Verification**
-  - [ ] Test the component at different viewport widths.
-  - [ ] Confirm ~3 frames are primarily visible on small screens.
-  - [ ] Confirm ~6 frames are primarily visible on medium screens.
-  - [ ] Confirm ~9 frames are primarily visible on large screens.
+- [x] **Verification** ✅ COMPLETED
+  - [x] Test the component at different viewport widths.
+  - [x] Confirm ~3 frames are primarily visible on small screens.
+  - [x] Confirm ~6 frames are primarily visible on medium screens.
+  - [x] Confirm ~9 frames are primarily visible on large screens.
 
 ## Phase 6: Finalization & Cleanup
 

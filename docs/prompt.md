@@ -141,7 +141,7 @@ Now the carousel should rotate automatically, pause when dragged, and resume 5 s
 
 ---
 
-### Prompt 7: Implementing Responsiveness
+### Prompt 7: Implementing Responsiveness ✅ COMPLETED
 
 ```text
 The final piece of functionality is making the carousel responsive. We need to adjust the view to show approximately 9, 6, or 3 frames based on the screen width. This is best achieved by changing the `translateZ` of the `.armsContainer` and the `perspective` on the wrapper.

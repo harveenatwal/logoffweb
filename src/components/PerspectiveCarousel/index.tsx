@@ -4,6 +4,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, useMotionValue, PanInfo, useAnimation } from 'framer-motion';
 import { imageUrls } from '@/lib/imageData';
+import { useResponsiveCarousel } from './useResponsiveCarousel';
 import styles from './styles.module.css';
 
 interface PerspectiveCarouselProps {
@@ -24,6 +25,9 @@ const PerspectiveCarousel: React.FC<PerspectiveCarouselProps> = ({
   
   // Timer ref for managing resume delay
   const resumeTimerRef = useRef<NodeJS.Timeout | null>(null);
+  
+  // Responsive values for different screen sizes
+  const { perspective, translateZ } = useResponsiveCarousel();
 
   // Auto-rotation function
   const startAutoRotate = useCallback(() => {
@@ -85,7 +89,7 @@ const PerspectiveCarousel: React.FC<PerspectiveCarouselProps> = ({
 
     // Calculate rotation angle for this arm (360 degrees / 7 arms)
     const armRotationAngle = (360 / 7) * armIndex;
-    const armTransform = `rotateY(${armRotationAngle}deg) translateZ(550px)`;
+    const armTransform = `rotateY(${armRotationAngle}deg) translateZ(${translateZ})`;
 
     return (
       <div 
@@ -120,6 +124,7 @@ const PerspectiveCarousel: React.FC<PerspectiveCarouselProps> = ({
   return (
     <motion.div 
       className={styles.carouselWrapper}
+      style={{ perspective }}
       drag="x"
       onDragStart={handleDragStart}
       onDrag={handleDrag}
