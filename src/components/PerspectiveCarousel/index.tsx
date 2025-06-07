@@ -1,6 +1,8 @@
 // ABOUTME: 3D perspective carousel component with barrel distortion effect
 // ABOUTME: Displays 14 images in a rotating 3D cylinder with drag and auto-rotation
 
+'use client';
+
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, useMotionValue, PanInfo, useAnimation } from 'framer-motion';
 import { imageUrls } from '@/lib/imageData';

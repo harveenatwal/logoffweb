@@ -1,6 +1,8 @@
 // ABOUTME: Custom hook for responsive 3D carousel viewport adjustments
 // ABOUTME: Returns perspective and translateZ values based on screen width breakpoints
 
+'use client';
+
 import { useState, useEffect } from 'react';
 
 interface ResponsiveCarouselValues {

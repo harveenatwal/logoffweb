@@ -1,6 +1,6 @@
 import Link from "next/link";
-import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
+import PerspectiveCarousel from "@/components/PerspectiveCarousel";
 import "@/app/purple-body.css";
 
 export default function Home() {
@@ -68,6 +68,7 @@ export default function Home() {
             Download the app!
           </button>
         </div>
+        <PerspectiveCarousel />
         <div className="absolute -bottom-[15%] left-1/2 -translate-x-1/2 w-[120%] h-[30%] bg-black rounded-[50%]"></div>
       </div>
       <Footer />
