@@ -1,8 +1,8 @@
 // ABOUTME: 3D perspective carousel component with barrel distortion effect
 // ABOUTME: Displays 14 images in a rotating 3D cylinder with drag and auto-rotation
 
-import React, { useState } from 'react';
-import { motion, useMotionValue, PanInfo } from 'framer-motion';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { motion, useMotionValue, PanInfo, useAnimation } from 'framer-motion';
 import { imageUrls } from '@/lib/imageData';
 import styles from './styles.module.css';
 
@@ -18,8 +18,46 @@ const PerspectiveCarousel: React.FC<PerspectiveCarouselProps> = ({
   
   // Framer Motion value to control the carousel's rotation
   const rotateY = useMotionValue(0);
+  
+  // Animation controls for auto-rotation
+  const controls = useAnimation();
+  
+  // Timer ref for managing resume delay
+  const resumeTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Auto-rotation function
+  const startAutoRotate = useCallback(() => {
+    controls.start({
+      rotateY: [rotateY.get(), rotateY.get() - 360],
+      transition: { duration: 30, ease: 'linear', repeat: Infinity }
+    });
+  }, [controls, rotateY]);
+
+  // Start auto-rotation on component mount
+  useEffect(() => {
+    startAutoRotate();
+    
+    // Cleanup function to stop animation and clear timer
+    return () => {
+      controls.stop();
+      if (resumeTimerRef.current) {
+        clearTimeout(resumeTimerRef.current);
+      }
+    };
+  }, [controls, startAutoRotate]);
 
   // Drag event handlers
+  const handleDragStart = () => {
+    // Stop auto-rotation when drag starts
+    controls.stop();
+    
+    // Clear any pending resume timer
+    if (resumeTimerRef.current) {
+      clearTimeout(resumeTimerRef.current);
+      resumeTimerRef.current = null;
+    }
+  };
+
   const handleDrag = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     // Convert drag offset to rotation angle (sensitivity: -0.1 degrees per pixel)
     const dragRotation = info.offset.x * -0.1;
@@ -30,6 +68,11 @@ const PerspectiveCarousel: React.FC<PerspectiveCarouselProps> = ({
     // Commit the rotation when drag ends
     const dragRotation = info.offset.x * -0.1;
     setRotation(current => current + dragRotation);
+    
+    // Resume auto-rotation after 5 seconds
+    resumeTimerRef.current = setTimeout(() => {
+      startAutoRotate();
+    }, 5000);
   };
 
   // Create 7 arms, each containing 2 frames (14 total frames)
@@ -78,6 +121,7 @@ const PerspectiveCarousel: React.FC<PerspectiveCarouselProps> = ({
     <motion.div 
       className={styles.carouselWrapper}
       drag="x"
+      onDragStart={handleDragStart}
       onDrag={handleDrag}
       onDragEnd={handleDragEnd}
       dragMomentum={false}
@@ -86,6 +130,7 @@ const PerspectiveCarousel: React.FC<PerspectiveCarouselProps> = ({
         <motion.div 
           className={styles.armsContainer}
           style={{ rotateY }}
+          animate={controls}
         >
           {arms}
         </motion.div>

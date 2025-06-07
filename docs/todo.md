@@ -71,23 +71,23 @@ This checklist outlines all the necessary steps to build the responsive 3D persp
 
 ## Phase 4: Automatic Rotation & Controls
 
-- [ ] **Implement Auto-Rotation**
+- [x] **Implement Auto-Rotation** ✅ COMPLETED
 
-  - [ ] Initialize `useAnimation` controls from Framer Motion.
-  - [ ] Link the animation controls to the rotating `motion.div`.
-  - [ ] Create a function (`startAutoRotate`) that starts an infinite, linear animation of `rotateY` by -360 degrees over 30 seconds.
-  - [ ] Use a `useEffect` hook to call `startAutoRotate` on component mount.
+  - [x] Initialize `useAnimation` controls from Framer Motion.
+  - [x] Link the animation controls to the rotating `motion.div`.
+  - [x] Create a function (`startAutoRotate`) that starts an infinite, linear animation of `rotateY` by -360 degrees over 30 seconds.
+  - [x] Use a `useEffect` hook to call `startAutoRotate` on component mount.
 
-- [ ] **Implement Pause/Resume Logic**
+- [x] **Implement Pause/Resume Logic** ✅ COMPLETED
 
-  - [ ] Call `controls.stop()` within the `onDragStart` event handler.
-  - [ ] Use `setTimeout` within the `onDragEnd` handler to call `startAutoRotate` after 5 seconds of inactivity.
-  - [ ] Use `useRef` to hold the timer ID so it can be cleared if a new drag starts before the 5 seconds are up.
+  - [x] Call `controls.stop()` within the `onDragStart` event handler.
+  - [x] Use `setTimeout` within the `onDragEnd` handler to call `startAutoRotate` after 5 seconds of inactivity.
+  - [x] Use `useRef` to hold the timer ID so it can be cleared if a new drag starts before the 5 seconds are up.
 
-- [ ] **Verification**
-  - [ ] Check that the carousel rotates clockwise automatically on page load.
-  - [ ] Verify that any user interaction (a click or drag start) immediately pauses the rotation.
-  - [ ] Confirm that rotation resumes from its last position exactly 5 seconds after the interaction ends.
+- [x] **Verification** ✅ COMPLETED
+  - [x] Check that the carousel rotates clockwise automatically on page load.
+  - [x] Verify that any user interaction (a click or drag start) immediately pauses the rotation.
+  - [x] Confirm that rotation resumes from its last position exactly 5 seconds after the interaction ends.
 
 ## Phase 5: Responsiveness
 

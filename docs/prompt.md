@@ -116,7 +116,7 @@ Now, the user should be able to drag the carousel left and right to rotate it.
 
 ---
 
-### Prompt 6: Adding Automatic Rotation and Pausing
+### Prompt 6: Adding Automatic Rotation and Pausing ✅ COMPLETED
 
 ````text
 Let's implement the automatic clockwise rotation and the pause/resume logic.
