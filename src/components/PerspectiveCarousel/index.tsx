@@ -8,12 +8,18 @@ import { useResponsiveCarousel } from './useResponsiveCarousel';
 import styles from './styles.module.css';
 
 interface PerspectiveCarouselProps {
+  /**
+   * Array of 14 image URLs to display in the 3D carousel.
+   * Falls back to default placeholder images if not provided.
+   */
   images?: string[];
 }
 
 const PerspectiveCarousel: React.FC<PerspectiveCarouselProps> = ({
-  images = imageUrls
+  images
 }) => {
+  // Use provided images or fall back to default imageUrls
+  const carouselImages = images && images.length >= 14 ? images : imageUrls;
   // State to track the committed rotation angle
   const [rotation, setRotation] = useState(0);
   
@@ -29,19 +35,31 @@ const PerspectiveCarousel: React.FC<PerspectiveCarouselProps> = ({
   // Responsive values for different screen sizes
   const { perspective, translateZ } = useResponsiveCarousel();
 
-  // Auto-rotation function
+  /**
+   * Initiates the automatic clockwise rotation animation
+   * Rotates 360 degrees clockwise over 30 seconds with infinite repeat
+   */
   const startAutoRotate = useCallback(() => {
     controls.start({
+      // Animate from current position to current position - 360 degrees (clockwise)
       rotateY: [rotateY.get(), rotateY.get() - 360],
-      transition: { duration: 30, ease: 'linear', repeat: Infinity }
+      transition: { 
+        duration: 30,           // 30 seconds for full rotation
+        ease: 'linear',         // Constant speed
+        repeat: Infinity        // Loop indefinitely
+      }
     });
   }, [controls, rotateY]);
 
-  // Start auto-rotation on component mount
+  /**
+   * Auto-rotation lifecycle management
+   * Starts rotation on mount and handles cleanup on unmount
+   */
   useEffect(() => {
+    // Begin auto-rotation immediately when component mounts
     startAutoRotate();
     
-    // Cleanup function to stop animation and clear timer
+    // Cleanup function: stop animations and clear timers on unmount
     return () => {
       controls.stop();
       if (resumeTimerRef.current) {
@@ -50,12 +68,15 @@ const PerspectiveCarousel: React.FC<PerspectiveCarouselProps> = ({
     };
   }, [controls, startAutoRotate]);
 
-  // Drag event handlers
+  /**
+   * Drag event handlers for user interaction
+   * These handle the pause/resume logic and real-time rotation updates
+   */
   const handleDragStart = () => {
-    // Stop auto-rotation when drag starts
+    // Immediately stop auto-rotation when user starts dragging
     controls.stop();
     
-    // Clear any pending resume timer
+    // Clear any pending resume timer to prevent overlapping timers
     if (resumeTimerRef.current) {
       clearTimeout(resumeTimerRef.current);
       resumeTimerRef.current = null;
@@ -63,32 +84,43 @@ const PerspectiveCarousel: React.FC<PerspectiveCarouselProps> = ({
   };
 
   const handleDrag = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-    // Convert drag offset to rotation angle (sensitivity: -0.1 degrees per pixel)
+    // Convert horizontal drag distance to rotation angle
+    // Sensitivity: -0.1 degrees per pixel (negative for natural drag direction)
     const dragRotation = info.offset.x * -0.1;
+    
+    // Apply real-time rotation by combining base rotation with current drag offset
     rotateY.set(rotation + dragRotation);
   };
 
   const handleDragEnd = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-    // Commit the rotation when drag ends
+    // Calculate final rotation based on total drag distance
     const dragRotation = info.offset.x * -0.1;
+    
+    // Commit the rotation to state for future drag calculations
     setRotation(current => current + dragRotation);
     
-    // Resume auto-rotation after 5 seconds
+    // Schedule auto-rotation to resume after 5 seconds of inactivity
     resumeTimerRef.current = setTimeout(() => {
       startAutoRotate();
     }, 5000);
   };
 
-  // Create 7 arms, each containing 2 frames (14 total frames)
+  /**
+   * Generate the 3D arm structure
+   * Creates 7 arms arranged in a circle, each containing 2 frames
+   */
   const arms = Array.from({ length: 7 }, (_, armIndex) => {
     const frameStart = armIndex * 2;
     const armImages = [
-      images[frameStart] || imageUrls[frameStart],
-      images[frameStart + 1] || imageUrls[frameStart + 1]
+      carouselImages[frameStart],
+      carouselImages[frameStart + 1]
     ];
 
-    // Calculate rotation angle for this arm (360 degrees / 7 arms)
+    // Calculate rotation angle for this arm (360° ÷ 7 arms = ~51.43° per arm)
     const armRotationAngle = (360 / 7) * armIndex;
+    
+    // Apply arm transforms: rotate around Y-axis and push out to form cylinder
+    // translateZ value is responsive and determines the cylinder radius
     const armTransform = `rotateY(${armRotationAngle}deg) translateZ(${translateZ})`;
 
     return (
@@ -98,8 +130,9 @@ const PerspectiveCarousel: React.FC<PerspectiveCarouselProps> = ({
         style={{ transform: armTransform }}
       >
         {armImages.map((imageSrc, frameIndex) => {
-          // First frame: rotateY(90deg) translateZ(-130px)
-          // Second frame: rotateY(-90deg) translateZ(-130px)
+          // Position frames perpendicular to arm direction for barrel effect
+          // First frame: rotate 90° and translate inward by half frame width (130px)
+          // Second frame: rotate -90° and translate inward by half frame width
           const frameRotation = frameIndex === 0 ? 90 : -90;
           const frameTransform = `rotateY(${frameRotation}deg) translateZ(-130px)`;
 
@@ -124,18 +157,18 @@ const PerspectiveCarousel: React.FC<PerspectiveCarouselProps> = ({
   return (
     <motion.div 
       className={styles.carouselWrapper}
-      style={{ perspective }}
+      style={{ perspective }} // Dynamic perspective for responsive viewing
       drag="x"
       onDragStart={handleDragStart}
       onDrag={handleDrag}
       onDragEnd={handleDragEnd}
-      dragMomentum={false}
+      dragMomentum={false} // Disable momentum for precise control
     >
       <motion.div className={styles.carousel}>
         <motion.div 
           className={styles.armsContainer}
-          style={{ rotateY }}
-          animate={controls}
+          style={{ rotateY }} // Manual rotation control during drag
+          animate={controls}  // Auto-rotation animation control
         >
           {arms}
         </motion.div>
