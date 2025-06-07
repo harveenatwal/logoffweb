@@ -37,17 +37,17 @@ This checklist outlines all the necessary steps to build the responsive 3D persp
   - [x] Style `<img>` tags with `object-fit: cover`.
   - [x] Apply `user-select: none` and `touch-action: none` to the main wrapper.
 
-- [ ] **Apply Static 3D Transforms**
+- [x] **Apply Static 3D Transforms** ✅ COMPLETED
 
-  - [ ] Dynamically apply the `rotateY` transform to each of the 7 `.arm` elements using inline styles (`style={{...}}`) to arrange them in a circle.
-  - [ ] Dynamically apply an initial `translateZ` to each `.arm` to define the carousel's radius.
-  - [ ] Apply the fixed `transform: rotateY(90deg) translateZ(-130px)` to the first frame in each arm.
-  - [ ] Apply the fixed `transform: rotateY(-90deg) translateZ(-130px)` to the second frame in each arm.
+  - [x] Dynamically apply the `rotateY` transform to each of the 7 `.arm` elements using inline styles (`style={{...}}`) to arrange them in a circle.
+  - [x] Dynamically apply an initial `translateZ` to each `.arm` to define the carousel's radius.
+  - [x] Apply the fixed `transform: rotateY(90deg) translateZ(-130px)` to the first frame in each arm.
+  - [x] Apply the fixed `transform: rotateY(-90deg) translateZ(-130px)` to the second frame in each arm.
 
-- [ ] **Verification**
-  - [ ] Confirm the carousel renders as a static 3D barrel/cylinder.
-  - [ ] Verify that Frame 0 (the first image) is positioned front-and-center.
-  - [ ] Check that the "barrel distortion" effect from the `perspective` property is visible.
+- [x] **Verification** ✅ COMPLETED
+  - [x] Confirm the carousel renders as a static 3D barrel/cylinder.
+  - [x] Verify that Frame 0 (the first image) is positioned front-and-center.
+  - [x] Check that the "barrel distortion" effect from the `perspective` property is visible.
 
 ## Phase 3: Interactivity with Framer Motion
 

@@ -20,17 +20,36 @@ const PerspectiveCarousel: React.FC<PerspectiveCarouselProps> = ({
       images[frameStart + 1] || imageUrls[frameStart + 1]
     ];
 
+    // Calculate rotation angle for this arm (360 degrees / 7 arms)
+    const armRotationAngle = (360 / 7) * armIndex;
+    const armTransform = `rotateY(${armRotationAngle}deg) translateZ(550px)`;
+
     return (
-      <div key={armIndex} className={styles.arm}>
-        {armImages.map((imageSrc, frameIndex) => (
-          <div key={frameIndex} className={styles.frame}>
-            <img 
-              src={imageSrc} 
-              alt={`Carousel image ${frameStart + frameIndex + 1}`}
-              draggable={false}
-            />
-          </div>
-        ))}
+      <div 
+        key={armIndex} 
+        className={styles.arm}
+        style={{ transform: armTransform }}
+      >
+        {armImages.map((imageSrc, frameIndex) => {
+          // First frame: rotateY(90deg) translateZ(-130px)
+          // Second frame: rotateY(-90deg) translateZ(-130px)
+          const frameRotation = frameIndex === 0 ? 90 : -90;
+          const frameTransform = `rotateY(${frameRotation}deg) translateZ(-130px)`;
+
+          return (
+            <div 
+              key={frameIndex} 
+              className={styles.frame}
+              style={{ transform: frameTransform }}
+            >
+              <img 
+                src={imageSrc} 
+                alt={`Carousel image ${frameStart + frameIndex + 1}`}
+                draggable={false}
+              />
+            </div>
+          );
+        })}
       </div>
     );
   });

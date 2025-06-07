@@ -59,7 +59,7 @@ Now, add the initial CSS to `styles.module.css` for basic layout and sizing only
 
 ---
 
-### Prompt 3: Applying Static 3D Transforms
+### Prompt 3: Applying Static 3D Transforms ✅ COMPLETED
 
 ```text
 Now, let's apply the static 3D transforms to position the arms and frames correctly. We will not add any interactivity yet.
