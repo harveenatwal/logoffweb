@@ -1,27 +1,29 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Bricolage_Grotesque, Inter } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 import Script from "next/script";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const bricolageGrotesque = Bricolage_Grotesque({
+  variable: "--font-bricolage-grotesque",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Logoff - Social App Blocker",
+  title: "Logoff - App Blocker",
   description:
-    "Master screen time and unlock deeper focus, together. Invite friends, join group challenges, and support each other.",
+    "Easily focus better with Logoff. An app blocker specially designed to get back your lost hours. Over 10,000 happy users.",
   openGraph: {
     title: "Logoff - Social App Blocker",
     description:
-      "Master screen time and unlock deeper focus, together. Invite friends, join group challenges, and support each other.",
+      "Easily focus better with Logoff. An app blocker specially designed to get back your lost hours. Over 10,000 happy users.",
     url: "https://www.logoffapp.com",
     siteName: "Logoff",
     images: [
@@ -55,7 +57,7 @@ export default function RootLayout({
         </script>
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${bricolageGrotesque.variable} ${inter.variable} antialiased`}
       >
         {children}
         <Toaster />
