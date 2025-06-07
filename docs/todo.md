@@ -58,16 +58,16 @@ This checklist outlines all the necessary steps to build the responsive 3D persp
   - [x] Initialize `useMotionValue(0)` to control the `rotateY` property.
   - [x] Apply the motion value to the `motion.div`'s `style` prop.
 
-- [ ] **Implement Drag-to-Rotate**
+- [x] **Implement Drag-to-Rotate** ✅ COMPLETED
 
-  - [ ] Add the `drag="x"` prop to a suitable drag surface `motion.div`.
-  - [ ] Add `useState` to track the committed rotation angle.
-  - [ ] Implement the `onDrag` event handler to update the `rotateY` motion value based on drag offset.
-  - [ ] Implement the `onDragEnd` event handler to update the committed rotation state.
+  - [x] Add the `drag="x"` prop to a suitable drag surface `motion.div`.
+  - [x] Add `useState` to track the committed rotation angle.
+  - [x] Implement the `onDrag` event handler to update the `rotateY` motion value based on drag offset.
+  - [x] Implement the `onDragEnd` event handler to update the committed rotation state.
 
-- [ ] **Verification**
-  - [ ] Test that the user can click and drag horizontally to rotate the carousel.
-  - [ ] Confirm the rotation feels smooth and directly maps to the drag gesture.
+- [x] **Verification** ✅ COMPLETED
+  - [x] Test that the user can click and drag horizontally to rotate the carousel.
+  - [x] Confirm the rotation feels smooth and directly maps to the drag gesture.
 
 ## Phase 4: Automatic Rotation & Controls
 

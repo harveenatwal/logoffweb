@@ -100,7 +100,7 @@ The component should look identical to the previous step, but the rotation is no
 
 ---
 
-### Prompt 5: Implementing Drag-to-Rotate Interaction
+### Prompt 5: Implementing Drag-to-Rotate Interaction ✅ COMPLETED
 
 ```text
 Now we will make the carousel interactive by adding drag-to-rotate functionality.
