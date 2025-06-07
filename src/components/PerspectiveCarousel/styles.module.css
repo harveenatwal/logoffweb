@@ -2,21 +2,47 @@
 /* ABOUTME: Contains styles for the barrel distortion effect and frame positioning */
 
 .carouselWrapper {
-  /* Initial styles will be added in subsequent prompts */
+  height: 240px;
+  width: 100%;
+  perspective: 500px;
+  user-select: none;
+  touch-action: none;
 }
 
 .carousel {
-  /* Initial styles will be added in subsequent prompts */
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
 }
 
 .armsContainer {
-  /* Initial styles will be added in subsequent prompts */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform-style: preserve-3d;
 }
 
 .arm {
-  /* Initial styles will be added in subsequent prompts */
+  position: absolute;
+  height: 240px;
+  width: 1400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transform-style: preserve-3d;
 }
 
 .frame {
-  /* Initial styles will be added in subsequent prompts */
+  height: 370px;
+  width: 260px;
+  position: relative;
+}
+
+.frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
 }

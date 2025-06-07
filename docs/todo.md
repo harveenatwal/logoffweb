@@ -18,24 +18,24 @@ This checklist outlines all the necessary steps to build the responsive 3D persp
   - [x] Import `imageUrls` and `styles.module.css` into the component.
   - [x] Define component props to accept an array of image URLs.
 
-- [ ] **Build the Static DOM**
-  - [ ] Render the root wrapper `div` (`.carouselWrapper`).
-  - [ ] Render the main perspective `div` (`.carousel`).
-  - [ ] Render the rotating container for the arms (`.armsContainer`).
-  - [ ] Programmatically generate 7 "arm" `div`s (`.arm`).
-  - [ ] Programmatically generate 2 "frame" `div`s (`.frame`) inside each arm.
-  - [ ] Place an `<img>` tag inside each frame, connecting it to the `imageUrls` data.
+- [x] **Build the Static DOM** ✅ COMPLETED
+  - [x] Render the root wrapper `div` (`.carouselWrapper`).
+  - [x] Render the main perspective `div` (`.carousel`).
+  - [x] Render the rotating container for the arms (`.armsContainer`).
+  - [x] Programmatically generate 7 "arm" `div`s (`.arm`).
+  - [x] Programmatically generate 2 "frame" `div`s (`.frame`) inside each arm.
+  - [x] Place an `<img>` tag inside each frame, connecting it to the `imageUrls` data.
 
 ## Phase 2: Static 3D Visual Implementation
 
-- [ ] **Apply Base CSS for Layout**
+- [x] **Apply Base CSS for Layout** ✅ COMPLETED
 
-  - [ ] Style `.carouselWrapper` with fixed height (`240px`), full width, and `perspective: 500px`.
-  - [ ] Style `.carousel` and `.armsContainer` for absolute centering and `transform-style: preserve-3d`.
-  - [ ] Style `.arm` with correct dimensions (`240px` x `1400px`) and flex properties (`justify-content: space-between`, `align-items: center`).
-  - [ ] Style `.frame` with correct dimensions (`370px` x `260px`).
-  - [ ] Style `<img>` tags with `object-fit: cover`.
-  - [ ] Apply `user-select: none` and `touch-action: none` to the main wrapper.
+  - [x] Style `.carouselWrapper` with fixed height (`240px`), full width, and `perspective: 500px`.
+  - [x] Style `.carousel` and `.armsContainer` for absolute centering and `transform-style: preserve-3d`.
+  - [x] Style `.arm` with correct dimensions (`240px` x `1400px`) and flex properties (`justify-content: space-between`, `align-items: center`).
+  - [x] Style `.frame` with correct dimensions (`370px` x `260px`).
+  - [x] Style `<img>` tags with `object-fit: cover`.
+  - [x] Apply `user-select: none` and `touch-action: none` to the main wrapper.
 
 - [ ] **Apply Static 3D Transforms**
 

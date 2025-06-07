@@ -34,7 +34,7 @@ In `index.tsx`, import the `imageUrls` array and the styles. The component shoul
 
 ---
 
-### Prompt 2: Building the Static DOM Structure
+### Prompt 2: Building the Static DOM Structure ✅ COMPLETED
 
 ```text
 Based on the previous step, let's build the full static DOM structure inside the `PerspectiveCarousel` component.
