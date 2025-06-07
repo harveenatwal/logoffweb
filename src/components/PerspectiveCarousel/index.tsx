@@ -2,6 +2,7 @@
 // ABOUTME: Displays 14 images in a rotating 3D cylinder with drag and auto-rotation
 
 import React from 'react';
+import { motion, useMotionValue } from 'framer-motion';
 import { imageUrls } from '@/lib/imageData';
 import styles from './styles.module.css';
 
@@ -12,6 +13,8 @@ interface PerspectiveCarouselProps {
 const PerspectiveCarousel: React.FC<PerspectiveCarouselProps> = ({
   images = imageUrls
 }) => {
+  // Framer Motion value to control the carousel's rotation
+  const rotateY = useMotionValue(0);
   // Create 7 arms, each containing 2 frames (14 total frames)
   const arms = Array.from({ length: 7 }, (_, armIndex) => {
     const frameStart = armIndex * 2;
@@ -56,11 +59,14 @@ const PerspectiveCarousel: React.FC<PerspectiveCarouselProps> = ({
 
   return (
     <div className={styles.carouselWrapper}>
-      <div className={styles.carousel}>
-        <div className={styles.armsContainer}>
+      <motion.div className={styles.carousel}>
+        <motion.div 
+          className={styles.armsContainer}
+          style={{ rotateY }}
+        >
           {arms}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 };

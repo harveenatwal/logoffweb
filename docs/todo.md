@@ -51,12 +51,12 @@ This checklist outlines all the necessary steps to build the responsive 3D persp
 
 ## Phase 3: Interactivity with Framer Motion
 
-- [ ] **Integrate Framer Motion**
+- [x] **Integrate Framer Motion** ✅ COMPLETED
 
-  - [ ] Install the `framer-motion` package.
-  - [ ] Convert the `.armsContainer` `div` to a `motion.div`.
-  - [ ] Initialize `useMotionValue(0)` to control the `rotateY` property.
-  - [ ] Apply the motion value to the `motion.div`'s `style` prop.
+  - [x] Install the `framer-motion` package.
+  - [x] Convert the `.armsContainer` `div` to a `motion.div`.
+  - [x] Initialize `useMotionValue(0)` to control the `rotateY` property.
+  - [x] Apply the motion value to the `motion.div`'s `style` prop.
 
 - [ ] **Implement Drag-to-Rotate**
 
