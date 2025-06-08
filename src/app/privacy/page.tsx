@@ -4,7 +4,7 @@ import "@/app/purple-body.css";
 
 export default function TermsPage() {
   return (
-    <div className="min-h-screen flex flex-col text-white">
+    <div className="min-h-screen flex flex-col space-background text-white">
       <Header />
 
       <main className="flex-1 py-12 md:py-16">

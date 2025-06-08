@@ -45,7 +45,7 @@
     background-position-x: 50%;
     background-position-y: 0%;
     background-repeat: no-repeat;
-    background-size: 200%;
+    background-size: 500%;
   }
 }
 
@@ -89,7 +89,7 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(0 0 0);
+  --background: #0D1117;
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -178,5 +178,6 @@
     transform: translate(0, -70%) rotate(-45deg);
     background: radial-gradient(circle at left bottom, #e6b7fe 20%, #5049c2 40%, rgba(58, 55, 255, 0) 50%);
     filter: blur(50px);
+    pointer-events: none;
   }
 }
