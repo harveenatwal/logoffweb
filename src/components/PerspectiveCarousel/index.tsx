@@ -3,10 +3,9 @@
 
 "use client";
 
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import { motion, useMotionValue, PanInfo, useAnimation } from "framer-motion";
+import React, { useEffect, useRef, useCallback } from "react";
+import { motion, useMotionValue, useAnimation } from "framer-motion";
 import { imageUrls } from "@/lib/imageData";
-import { useResponsiveCarousel } from "./useResponsiveCarousel";
 import styles from "./styles.module.css";
 
 interface PerspectiveCarouselProps {
@@ -22,8 +21,6 @@ const PerspectiveCarousel: React.FC<PerspectiveCarouselProps> = ({
 }) => {
   // Use provided images or fall back to default imageUrls
   const carouselImages = images && images.length >= 14 ? images : imageUrls;
-  // State to track the committed rotation angle
-  const [rotation, setRotation] = useState(0);
 
   // Framer Motion value to control the carousel's rotation
   const rotateY = useMotionValue(0);

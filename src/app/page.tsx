@@ -9,7 +9,7 @@ import "@/app/purple-body.css";
 
 export default function Home() {
   return (
-    <div className="min-h-screen h-full flex flex-col bg-black items-center">
+    <div className="min-h-screen h-full flex flex-col bg-black items-center overflow-hidden">
       <div className="h-10">
         <Marquee speed={30}>
           <span className="text-white/60 text-sm font-medium space-x-6">
@@ -29,7 +29,7 @@ export default function Home() {
         </Marquee>
       </div>
       <div className="max-w-[118rem] px-2 sm:px-5 lg:px-10 w-full">
-        <div className="space-background w-full h-[65vh] md:h-[95vh] rounded-4xl relative overflow-visible flex flex-col">
+        <div className="space-background w-full h-[85vh] md:h-[95vh] rounded-4xl relative overflow-visible flex flex-col">
           <div className="flex justify-center">
             <div className="relative h-[24px] w-[24px] md:h-[32px] md:w-[32px]">
               <div
@@ -127,7 +127,7 @@ export default function Home() {
           <div className="absolute left-[10%] w-[60%] bottom-[40%]">
             <div className="gradient-blur"></div>
           </div>
-          <div className="flex justify-center absolute bottom-0 md:bottom-10 scale-50 md:scale-100 left-0 right-0 ">
+          <div className="flex justify-center absolute bottom-0 md:bottom-10 scale-40 md:scale-100 left-0 right-0 ">
             <PerspectiveCarousel />
           </div>
         </div>
