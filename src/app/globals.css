@@ -89,7 +89,7 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
+  --background: oklch(0 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -168,5 +168,15 @@
 @layer utilities {
   .font-bricolage-grotesque {
     font-family: var(--font-bricolage-grotesque);
+  }
+
+  .gradient-blur {
+    position: absolute;
+    left: 35%;
+    width: 60%;
+    padding: 30% 0;
+    transform: translate(0, -70%) rotate(-45deg);
+    background: radial-gradient(circle at left bottom, #e6b7fe 20%, #5049c2 40%, rgba(58, 55, 255, 0) 50%);
+    filter: blur(50px);
   }
 }

@@ -1,0 +1,59 @@
+/* ABOUTME: CSS Module for the Marquee component with edge fade effects */
+/* ABOUTME: Creates infinite scrolling animation with gradient masks on edges */
+
+.marqueeContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.marqueeContent {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.marqueeTrack {
+  display: flex;
+  animation: marqueeScroll linear infinite;
+}
+
+.marqueeItem {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  padding-right: 8rem; /* Increased space between repeated items */
+  flex-shrink: 0;
+}
+
+/* Fade gradients on edges */
+.fadeLeft,
+.fadeRight {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.fadeLeft {
+  left: 0;
+  background: linear-gradient(to right, rgb(0, 0, 0), transparent);
+}
+
+.fadeRight {
+  right: 0;
+  background: linear-gradient(to left, rgb(0, 0, 0), transparent);
+}
+
+/* Marquee animation */
+@keyframes marqueeScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-25%);
+  }
+}

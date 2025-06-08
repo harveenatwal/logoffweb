@@ -1,9 +1,9 @@
 // ABOUTME: Custom hook for responsive 3D carousel viewport adjustments
 // ABOUTME: Returns perspective and translateZ values based on screen width breakpoints
 
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 interface ResponsiveCarouselValues {
   perspective: string;
@@ -12,31 +12,31 @@ interface ResponsiveCarouselValues {
 
 export const useResponsiveCarousel = (): ResponsiveCarouselValues => {
   const [values, setValues] = useState<ResponsiveCarouselValues>({
-    perspective: '500px',
-    translateZ: '550px', // Default to Studio Display values
+    perspective: "500px",
+    translateZ: "550px", // Default to Studio Display values
   });
 
   useEffect(() => {
     const updateValues = () => {
       const width = window.innerWidth;
-      
+
       if (width < 768) {
         // Phone: shows ~3 frames
         setValues({
-          perspective: '500px',
-          translateZ: '180px',
+          perspective: "500px",
+          translateZ: "180px",
         });
       } else if (width <= 1280) {
         // MacBook: shows ~6 frames
         setValues({
-          perspective: '500px',
-          translateZ: '350px',
+          perspective: "500px",
+          translateZ: "350px",
         });
       } else {
         // Studio Display: shows ~9 frames
         setValues({
-          perspective: '500px',
-          translateZ: '550px',
+          perspective: "500px",
+          translateZ: "550px",
         });
       }
     };
@@ -45,11 +45,11 @@ export const useResponsiveCarousel = (): ResponsiveCarouselValues => {
     updateValues();
 
     // Listen for window resize events
-    window.addEventListener('resize', updateValues);
+    window.addEventListener("resize", updateValues);
 
     // Cleanup event listener
     return () => {
-      window.removeEventListener('resize', updateValues);
+      window.removeEventListener("resize", updateValues);
     };
   }, []);
 

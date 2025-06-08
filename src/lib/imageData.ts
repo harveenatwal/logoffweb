@@ -1,19 +1,19 @@
 // ABOUTME: Image data for the 3D perspective carousel component
-// ABOUTME: Contains 14 placeholder images using picsum.photos service
+// ABOUTME: Contains 14 high-resolution block screen images from the Logoff mobile app
 
 export const imageUrls: string[] = [
-  'https://picsum.photos/seed/1/260/370',
-  'https://picsum.photos/seed/2/260/370',
-  'https://picsum.photos/seed/3/260/370',
-  'https://picsum.photos/seed/4/260/370',
-  'https://picsum.photos/seed/5/260/370',
-  'https://picsum.photos/seed/6/260/370',
-  'https://picsum.photos/seed/7/260/370',
-  'https://picsum.photos/seed/8/260/370',
-  'https://picsum.photos/seed/9/260/370',
-  'https://picsum.photos/seed/10/260/370',
-  'https://picsum.photos/seed/11/260/370',
-  'https://picsum.photos/seed/12/260/370',
-  'https://picsum.photos/seed/13/260/370',
-  'https://picsum.photos/seed/14/260/370',
+  "https://cdn.logoffapp.com/block_screens/block-01.png",
+  "https://cdn.logoffapp.com/block_screens/block-02.png",
+  "https://cdn.logoffapp.com/block_screens/block-03.png",
+  "https://cdn.logoffapp.com/block_screens/block-04.png",
+  "https://cdn.logoffapp.com/block_screens/block-05.png",
+  "https://cdn.logoffapp.com/block_screens/block-06.png",
+  "https://cdn.logoffapp.com/block_screens/block-07.png",
+  "https://cdn.logoffapp.com/block_screens/block-08.png",
+  "https://cdn.logoffapp.com/block_screens/block-09.png",
+  "https://cdn.logoffapp.com/block_screens/block-10.png",
+  "https://cdn.logoffapp.com/block_screens/block-11.png",
+  "https://cdn.logoffapp.com/block_screens/block-12.png",
+  "https://cdn.logoffapp.com/block_screens/block-13.png",
+  "https://cdn.logoffapp.com/block_screens/block-14.png",
 ];
