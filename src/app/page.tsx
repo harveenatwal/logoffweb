@@ -29,7 +29,7 @@ export default function Home() {
         </Marquee>
       </div>
       <div className="max-w-[118rem] px-2 sm:px-5 lg:px-10 w-full">
-        <div className="space-background w-full h-[85vh] md:h-[95vh] rounded-4xl relative overflow-visible flex flex-col">
+        <div className="space-background w-full h-[85vh] md:h-[100vh] rounded-4xl relative overflow-visible flex flex-col">
           <div className="flex justify-center">
             <div className="relative h-[24px] w-[24px] md:h-[32px] md:w-[32px]">
               <div
@@ -78,10 +78,10 @@ export default function Home() {
               />
             </div>
           </div>
-          <div className="flex flex-col items-center flex-1 mt-13 md:mt-15 px-4">
+          <div className="flex flex-col items-center flex-1 mt-13 lg:mt-15 px-4  relative z-10">
             <motion.div className="overflow-hidden mb-4">
               <motion.h1
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white font-bricolage-grotesque"
+                className="text-4xl sm:text-5xl md:text-6xl xl:text-8xl font-bold text-white font-bricolage-grotesque text-center"
                 initial={{ y: 100 }}
                 animate={{ y: 0 }}
                 transition={{
@@ -89,11 +89,13 @@ export default function Home() {
                   ease: [0.33, 1, 0.68, 1], // Custom cubic-bezier for smooth effect
                 }}
               >
-                Meet Logoff
+                Cut Screen
+                <br />
+                Time in Half
               </motion.h1>
             </motion.div>
             <motion.p
-              className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white/80 max-w-2xl text-center"
+              className="text-lg sm:text-xl md:text-2xl text-white/80 max-w-2xl text-center"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
@@ -102,14 +104,13 @@ export default function Home() {
                 ease: "easeOut",
               }}
             >
-              Join thousands taking back their screen time — block apps
-              together, achieve more
+              Improve your concentration and focus. Thousands have with Logoff.
             </motion.p>
             <motion.a
               href="https://apps.apple.com/us/app/logoff-app-blocker/id6670452224"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 md:mt-8 px-6 md:px-8 py-3 md:py-4 bg-white text-black font-bold text-base md:text-lg lg:text-xl rounded-full hover:bg-white/90 transition-colors inline-block"
+              className="mt-6 md:mt-8 px-6 md:px-8 py-3 md:py-4 bg-white text-black font-bold text-base md:text-lg rounded-full hover:bg-white/90 transition-colors inline-block"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               whileHover={{ scale: 1.05 }}
@@ -123,12 +124,14 @@ export default function Home() {
               Download the app!
             </motion.a>
           </div>
-          <div className="absolute -bottom-[20%] left-1/2 -translate-x-1/2 w-[130%] h-[40%] bg-black rounded-[50%]"></div>
-          <div className="absolute left-[10%] w-[60%] bottom-[40%]">
-            <div className="gradient-blur"></div>
-          </div>
-          <div className="flex justify-center absolute bottom-0 md:bottom-10 scale-40 md:scale-100 left-0 right-0 ">
+          <div className="relative justify-center scale-40 lg:scale-70 z-1">
             <PerspectiveCarousel />
+          </div>
+          <div className="absolute -bottom-[20%] left-1/2 -translate-x-1/2 w-[130%] h-[40%] bg-black rounded-[50%]"></div>
+        </div>
+        <div className="relative">
+          <div className="absolute left-[10%] w-[60%] bottom-75">
+            <div className="gradient-blur"></div>
           </div>
         </div>
       </div>

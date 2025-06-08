@@ -120,7 +120,6 @@ const PerspectiveCarousel: React.FC<PerspectiveCarouselProps> = ({
   return (
     <motion.div
       className={styles.carouselWrapper}
-      dragMomentum={false} // Disable momentum for precise control
       style={{
         transform: `perspective(800px) rotateY(${rotateY.get()}deg)`,
       }}
