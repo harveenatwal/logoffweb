@@ -1,5 +1,5 @@
 import Link from "next/link";
-import LogoffWordmark from "./LogoffWordmark";
+import TimmWordmark from "./TimmWordmark";
 
 interface FooterProps {
   light?: boolean;
@@ -20,9 +20,9 @@ const Footer: React.FC<FooterProps> = ({ light }) => {
               href="/"
               className={`text-lg font-semibold ${primaryTextColor} hover:text-[#A093E8] 0 mt-0.5`}
             >
-              <LogoffWordmark
+              <TimmWordmark
                 className={`${primaryTextColor} h-4.5`}
-              ></LogoffWordmark>
+              ></TimmWordmark>
             </Link>
 
             <Link
@@ -35,7 +35,7 @@ const Footer: React.FC<FooterProps> = ({ light }) => {
 
           <div className={`flex items-center space-x-5 ${primaryTextColor}`}>
             <Link
-              href="mailto:support@focuspledge.com"
+              href="mailto:support@timm.so"
               className="hover:text-[#A093E8]"
               aria-label="Email"
             >
@@ -92,7 +92,7 @@ const Footer: React.FC<FooterProps> = ({ light }) => {
             </Link>
             {/* Instagram Icon */}
             <Link
-              href="https://instagram.com/logoff.app"
+              href="https://instagram.com/timm.so"
               target="_blank"
               className="hover:text-[#A093E8]"
               aria-label="Instagram"
@@ -131,7 +131,7 @@ const Footer: React.FC<FooterProps> = ({ light }) => {
             </Link>
           </div>
           <p className={`${secondaryTextColor}`}>
-            &copy; 2025 Logoff. All rights reserved.
+            &copy; 2025 Timm. All rights reserved.
           </p>
         </div>
       </div>

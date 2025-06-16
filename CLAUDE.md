@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-FocusPledge (Logoff) is a Next.js 15 marketing website for the Logoff mobile app - a focus and productivity app that helps users manage screen time through group challenges. The site handles challenge sharing, user onboarding, and deep linking to the mobile app.
+FocusPledge (Timm) is a Next.js 15 marketing website for the Timm mobile app - a focus and productivity app that helps users manage screen time through group challenges. The site handles challenge sharing, user onboarding, and deep linking to the mobile app.
 
 ## Development Commands
 

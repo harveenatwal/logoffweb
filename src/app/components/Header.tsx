@@ -1,5 +1,5 @@
 import Link from "next/link";
-import LogoffWordmark from "./LogoffWordmark";
+import TimmWordmark from "./TimmWordmark";
 
 interface HeaderProps {
   light?: boolean;
@@ -11,7 +11,7 @@ const Header: React.FC<HeaderProps> = ({ light }) => {
     <header className="absolute top-0 left-0 right-0 z-10 p-4 md:p-6">
       <nav className="mx-auto flex justify-between items-center">
         <Link href="/">
-          <LogoffWordmark className={`h-4 ${textColor} mx-1`} />
+          <TimmWordmark className={`h-4 ${textColor} mx-1`} />
         </Link>
       </nav>
     </header>

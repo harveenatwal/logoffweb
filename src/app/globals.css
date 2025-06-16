@@ -5,16 +5,16 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --color-logoff-white: #FFFFFF;
-  --color-logoff-purple: #A093E8;
-  --color-logoff-light-blue: #BCE0F0;
-  --color-logoff-pale-yellow: #F5EAAA;
-  --color-logoff-dark: #2A2A2E;
-  --color-logoff-medium-grey: #A9A9A9;
-  --color-logoff-black: #000000;
-  --color-logoff-star-purple: #C3B9F0;
-  --color-logoff-star-blue: #A7C7E7;
-  --color-logoff-star-yellow: #FFFACD;
+  --color-timm-white: #FFFFFF;
+  --color-timm-purple: #A093E8;
+  --color-timm-light-blue: #BCE0F0;
+  --color-timm-pale-yellow: #F5EAAA;
+  --color-timm-dark: #2A2A2E;
+  --color-timm-medium-grey: #A9A9A9;
+  --color-timm-black: #000000;
+  --color-timm-star-purple: #C3B9F0;
+  --color-timm-star-blue: #A7C7E7;
+  --color-timm-star-yellow: #FFFACD;
 
   --color-primary-light: #2A2A2E;
   --color-secondary-light: #555555;

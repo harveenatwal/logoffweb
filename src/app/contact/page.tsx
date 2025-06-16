@@ -17,8 +17,8 @@ export default function TermsPage() {
                 If you have any questions, feedback, or need assistance, please
                 don&apos;t hesitate to reach out. You can contact us via email
                 at{" "}
-                <a href="mailto:support@focuspledge.com">
-                  support@focuspledge.com
+                <a href="mailto:support@timm.so">
+                  support@timm.so
                 </a>
                 .
               </p>
@@ -34,6 +34,6 @@ export default function TermsPage() {
 }
 
 export const metadata = {
-  title: "Contact Us - Logoff",
-  description: "Contact the Logoff team for support, questions, and feedback.",
+  title: "Contact Us - Timm",
+  description: "Contact the Timm team for support, questions, and feedback.",
 };

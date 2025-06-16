@@ -25,7 +25,7 @@ import { Metadata } from "next";
 
 const DownloadAppButton = ({ id }: { id: string }) => (
   <a
-    href={`https://logoffapp.onelink.me/mmwN?af_xp=custom&pid=challenge&c=${id}&deep_link_value=https://logoffapp.com/join/${id}`}
+    href={`https://timm.onelink.me/pkHb/join?af_xp=custom&pid=challenge&c=${id}&deep_link_value=https://timm.so/join/${id}`}
     className="inline-flex items-center bg-black text-white py-3 px-6 font-semibold rounded-lg hover:bg-gray-800 transition-colors duration-300 ease-in-out shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
   >
     <svg
@@ -70,18 +70,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       error
     );
     return {
-      title: "Challenge Not Found | Logoff",
+      title: "Challenge Not Found | Timm",
       description:
-        "The challenge you are looking for could not be found. Explore other challenges on Logoff.",
+        "The challenge you are looking for could not be found. Explore other challenges on Timm.",
     };
   }
 
   // Use actual field names from your tables
   const challengeName = challenge.name || "This Challenge"; // Fallback if name is null
-  const hostName = challenge.host_profile?.full_name || "A Logoff User"; // Fallback
+  const hostName = challenge.host_profile?.full_name || "A Timm User"; // Fallback
 
-  const pageTitle = `${challengeName} by ${hostName} | Logoff`;
-  const pageDescription = `You're invited to join '${challengeName}', hosted by ${hostName} on Logoff. Master screen time, unlock deeper focus, and achieve your goals together.`;
+  const pageTitle = `${challengeName} by ${hostName} | Timm`;
+  const pageDescription = `You're invited to join '${challengeName}', hosted by ${hostName} on Timm. Master screen time, unlock deeper focus, and achieve your goals together.`;
 
   return {
     title: pageTitle,
@@ -90,10 +90,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: pageTitle,
       description: pageDescription,
       url: `/join/${challengeId}`, // Canonical URL for this page
-      siteName: "Logoff",
+      siteName: "Timm",
       images: [
         {
-          url: "https://cdn.logoffapp.com/opengraph.png",
+          url: "https://cdn.timm.so/opengraph.png",
           width: 1200,
           height: 600,
         },
@@ -169,9 +169,9 @@ const JoinPage = async ({ params }: { params: Promise<{ id: string }> }) => {
                 <h1 className="text-5xl font-serif font-medium text-center text-primary-light mb-8">
                   {challenge.name} {/* Use state data */}
                 </h1>
-                <DateDisplay 
-                  startDate={challenge.start_date} 
-                  endDate={challenge.end_date} 
+                <DateDisplay
+                  startDate={challenge.start_date}
+                  endDate={challenge.end_date}
                 />
                 {/* Image placeholder */}
               </div>
@@ -238,12 +238,12 @@ const JoinPage = async ({ params }: { params: Promise<{ id: string }> }) => {
               >
                 {/* ... (static content) ... */}
                 <div className="text-primary-light font-serif text-xl">
-                  How challenges work on Logoff
+                  How challenges work on Timm
                 </div>
                 <div className="text-secondary-light">
-                  When you join a Logoff Challenge, the same app blocking rule
-                  get applied to your phone as everyone else in the challenge,
-                  all at the same time. It helps everyone stay focused together,
+                  When you join a Timm Challenge, the same app blocking rule get
+                  applied to your phone as everyone else in the challenge, all
+                  at the same time. It helps everyone stay focused together,
                   knowing you&apos;re all following the same rules during the
                   challenge period!
                 </div>
@@ -279,7 +279,7 @@ const JoinPage = async ({ params }: { params: Promise<{ id: string }> }) => {
                   <AccordionItem value="item-4">
                     <AccordionTrigger>How does the app help?</AccordionTrigger>
                     <AccordionContent>
-                      Logoff provides tools to block apps, track your progress,
+                      Timm provides tools to block apps, track your progress,
                       and connect with others in the challenge.
                     </AccordionContent>
                   </AccordionItem>

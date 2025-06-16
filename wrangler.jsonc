@@ -4,7 +4,7 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "logoffweb",
+	"name": "timmweb",
 	"compatibility_date": "2025-05-03",
 	"compatibility_flags": [
 		"nodejs_compat"

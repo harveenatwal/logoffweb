@@ -104,10 +104,10 @@ export default function Home() {
                 ease: "easeOut",
               }}
             >
-              Improve your concentration and focus. Thousands have with Logoff.
+              Improve your concentration and focus. Thousands have with Timm.
             </motion.p>
             <motion.a
-              href="https://apps.apple.com/us/app/logoff-app-blocker/id6670452224"
+              href="https://apps.apple.com/us/app/timm-app-blocker/id6670452224"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-6 md:mt-8 px-6 md:px-8 py-3 md:py-4 bg-white text-black font-bold text-base md:text-lg rounded-full hover:bg-white/90 transition-colors inline-block"

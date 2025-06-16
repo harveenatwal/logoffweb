@@ -17,7 +17,7 @@ export default function TermsPage() {
               className="prose prose-lg max-w-none"
               dangerouslySetInnerHTML={{
                 __html: `
-              <p><strong>Last Updated:</strong> 03/23/2025</p>
+              <p><strong>Last Updated:</strong> 06/15/2025</p>
               
               <p>We understand that things don't always go as planned. All payments, including in-app purchases, are processed through the App Store, and we don't have access to your payment details. This means we are unable to issue refunds directly.</p>
               
@@ -25,7 +25,7 @@ export default function TermsPage() {
               <ol role="list">
                 <li>Open the <strong>App Store</strong> app on your device.</li>
                 <li>Tap your profile icon at the top right.</li>
-                <li>Select <strong>Purchase History</strong> and find your Logoff, previously named FocusPledge, purchase or in-app purchase.</li>
+                <li>Select <strong>Purchase History</strong> and find your Timm, previously named Logoff and FocusPledge, purchase or in-app purchase.</li>
                 <li>Tap <strong>Report a Problem</strong> and choose the reason for your refund request.</li>
                 <li>Follow the on-screen instructions to submit your request.</li>
               </ol>
@@ -41,7 +41,7 @@ export default function TermsPage() {
               <p>If Apple refuses your refund, unfortunately, we cannot offer further assistance, as refunds are entirely managed by Apple. We recommend contacting Apple Support for more information if your request is declined.</p>
               
               <h2>Contact Us</h2>
-              <p>If you have any questions or concerns about this policy, please contact us at <a href="mailto:support@focuspledge.com">support@focuspledge.com</a>.</p>
+              <p>If you have any questions or concerns about this policy, please contact us at <a href="mailto:support@timm.so">support@timm.so</a>.</p>
               
             `,
               }}
@@ -57,6 +57,6 @@ export default function TermsPage() {
 
 // Add basic metadata
 export const metadata = {
-  title: "Refund Policy - Logoff",
-  description: "Read the Refund Policy for the Logoff application and website.",
+  title: "Refund Policy - Timm",
+  description: "Read the Refund Policy for the Timm application and website.",
 };

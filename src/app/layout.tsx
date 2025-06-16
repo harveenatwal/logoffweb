@@ -17,18 +17,18 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Logoff - App Blocker",
+  title: "Timm - iPhone App Blocker",
   description:
-    "Easily focus better with Logoff. An app blocker specially designed to get back your lost hours. Over 10,000 happy users.",
+    "Easily focus better with Timm. An app blocker specially designed to get back your lost hours. Over 10,000 happy users.",
   openGraph: {
-    title: "Logoff - Social App Blocker",
+    title: "Timm - iPhone App Blocker",
     description:
-      "Easily focus better with Logoff. An app blocker specially designed to get back your lost hours. Over 10,000 happy users.",
-    url: "https://www.logoffapp.com",
-    siteName: "Logoff",
+      "Easily focus better with Timm. An app blocker specially designed to get back your lost hours. Over 10,000 happy users.",
+    url: "https://www.timm.so",
+    siteName: "Timm",
     images: [
       {
-        url: "https://cdn.logoffapp.com/opengraph_2.png",
+        url: "https://cdn.timm.so/opengraph_2.png",
         width: 1200,
         height: 600,
       },
