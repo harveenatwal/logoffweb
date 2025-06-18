@@ -93,7 +93,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: "Timm",
       images: [
         {
-          url: "https://cdn.timm.so/opengraph.png",
+          url: "https://cdn.timm.so/opengraph_2.png",
           width: 1200,
           height: 600,
         },
