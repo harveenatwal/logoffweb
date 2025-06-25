@@ -4,7 +4,7 @@ import Link from "next/link";
 import Footer from "@/app/components/Footer";
 import PerspectiveCarousel from "@/components/PerspectiveCarousel";
 import Marquee from "@/components/Marquee";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useTransform, PanInfo } from "framer-motion";
 import { useState } from "react";
 import "@/app/purple-body.css";
 
@@ -43,7 +43,7 @@ export default function Home() {
     {
       question: "How does Timmy actually block apps?",
       answer:
-        "Timmy uses iOS Screen Time API to create unbreakable app restrictions. Unlike other apps, you can't easily bypass blocks in moments of weakness - they're enforced at the system level.",
+        "Timmy uses iOS Screen Time API to create unbreakable app restrictions. Unlike other apps, you cannot easily bypass blocks in moments of weakness - they're enforced at the system level.",
     },
     {
       question: "What makes group challenges work?",
@@ -222,19 +222,6 @@ export default function Home() {
                   Join our Discord
                 </motion.a>
               </div>
-              <motion.p
-                className="text-white/50 text-sm mt-4"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{
-                  duration: 0.8,
-                  delay: 0.7,
-                  ease: "easeOut",
-                }}
-              >
-                3-day free trial & 100% money-back guarantee, no questions
-                asked.
-              </motion.p>
             </div>
             <motion.div
               className="lg:flex-1 flex justify-center mt-12 lg:mt-0"
@@ -295,48 +282,56 @@ export default function Home() {
 
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Features List */}
-            <div className="space-y-6 text-left order-2 lg:order-1 flex flex-col items-center md:items-end">
+            <div className="space-y-4 text-left order-2 lg:order-1 flex flex-col items-stretch lg:items-end">
               {features.map((feature, index) => (
                 <motion.div
                   key={index}
-                  className={`backdrop-blur-md border rounded-2xl p-6 cursor-pointer transition-all duration-300 w-3/4 relative overflow-hidden ${
+                  className={`border rounded-2xl p-6 cursor-pointer transition-all duration-300 w-full lg:w-3/4 ${
                     index === activeFeature
-                      ? "bg-gradient-to-br from-white/25 via-white/15 to-white/5 border-white/40 shadow-2xl scale-105"
-                      : "bg-gradient-to-br from-white/10 via-white/5 to-white/2 border-white/10 hover:from-white/15 hover:via-white/8 hover:to-white/3"
+                      ? "bg-white/10 border-white/30 shadow-lg"
+                      : "bg-white/5 border-white/10 hover:bg-white/8"
                   }`}
                   onClick={() => setActiveFeature(index)}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  {/* Glass highlight effect */}
-                  <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-white/10 to-transparent pointer-events-none" />
-
-                  <div className="relative z-10">
-                    <h3 className="text-lg font-bold text-white mb-3">
-                      {feature.title}
-                    </h3>
-                    <p className="text-white/70 leading-relaxed text-sm">
-                      {feature.description}
-                    </p>
-                  </div>
+                  <h3 className="text-lg font-bold text-white mb-3">
+                    {feature.title}
+                  </h3>
+                  <p className="text-white/70 leading-relaxed text-sm">
+                    {feature.description}
+                  </p>
                 </motion.div>
               ))}
             </div>
 
             {/* Phone Mockup */}
             <div className="w-full flex justify-center order-1 lg:order-2">
-              <div className="relative w-full max-w-md">
+              <div className="relative w-full max-w-md overflow-hidden">
                 <motion.div
                   className="w-full h-[600px] lg:h-[750px] flex items-center justify-center lg:scale-125"
                   key={activeFeature}
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.3 }}
+                  drag="x"
+                  dragConstraints={{ left: 0, right: 0 }}
+                  dragElastic={1}
+                  onDragEnd={(event, info: PanInfo) => {
+                    const swipeThreshold = 50;
+                    if (info.offset.x > swipeThreshold && activeFeature > 0) {
+                      setActiveFeature(activeFeature - 1);
+                    } else if (info.offset.x < -swipeThreshold && activeFeature < features.length - 1) {
+                      setActiveFeature(activeFeature + 1);
+                    }
+                  }}
+                  whileTap={{ cursor: "grabbing" }}
+                  className="lg:pointer-events-none"
                 >
                   <img
                     src={features[activeFeature].image}
                     alt={features[activeFeature].title}
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-contain select-none"
                   />
                 </motion.div>
                 {/* Dots indicator */}
@@ -431,7 +426,7 @@ export default function Home() {
                 Break phone addiction
               </h3>
               <p className="text-white/70 leading-relaxed">
-                Cut your screen time in half with smart blocking that can't be
+                Cut your screen time in half with smart blocking that cannot be
                 easily bypassed. Average users save 2+ hours daily.
               </p>
             </motion.div>
@@ -442,69 +437,71 @@ export default function Home() {
       {/* FAQ Section with Color Blocking */}
       <div className="max-w-[118rem] px-2 sm:px-5 lg:px-10 w-full">
         <section className="w-full rounded-4xl relative overflow-hidden bg-gradient-to-br from-purple-900/20 via-purple-800/10 to-transparent">
-        <div className="py-20 lg:py-32">
-          <div className="mx-auto px-4 max-w-4xl">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 font-bricolage-grotesque">
-                Frequently Asked Questions
-              </h2>
-              <p className="text-lg text-white/70">
-                Everything you need to know about Timmy
-              </p>
-            </div>
+          <div className="py-20 lg:py-32">
+            <div className="mx-auto px-4 max-w-4xl">
+              <div className="text-center mb-16">
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 font-bricolage-grotesque">
+                  Frequently Asked Questions
+                </h2>
+                <p className="text-lg text-white/70">
+                  Everything you need to know about Timmy
+                </p>
+              </div>
 
-            <div className="space-y-4">
-              {faqs.map((faq, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="overflow-hidden"
-                >
-                  <button
-                    onClick={() =>
-                      setActiveQuestion(activeQuestion === index ? null : index)
-                    }
-                    className={`w-full text-left p-6 rounded-2xl transition-all duration-300 ${
-                      activeQuestion === index
-                        ? "bg-gradient-to-r from-purple-600/20 to-purple-500/10 border border-purple-500/30"
-                        : "bg-white/5 border border-white/10 hover:bg-white/10"
-                    }`}
+              <div className="space-y-4">
+                {faqs.map((faq, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="overflow-hidden"
                   >
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-lg font-semibold text-white pr-4">
-                        {faq.question}
-                      </h3>
-                      <span
-                        className={`text-2xl text-purple-400 transition-transform duration-300 ${
-                          activeQuestion === index ? "rotate-45" : ""
-                        }`}
-                      >
-                        +
-                      </span>
-                    </div>
-
-                    <motion.div
-                      initial={false}
-                      animate={{
-                        height: activeQuestion === index ? "auto" : 0,
-                        marginTop: activeQuestion === index ? 16 : 0,
-                      }}
-                      transition={{ duration: 0.3 }}
-                      className="overflow-hidden"
+                    <button
+                      onClick={() =>
+                        setActiveQuestion(
+                          activeQuestion === index ? null : index
+                        )
+                      }
+                      className={`w-full text-left p-6 rounded-2xl transition-all duration-300 ${
+                        activeQuestion === index
+                          ? "bg-gradient-to-r from-purple-600/20 to-purple-500/10 border border-purple-500/30"
+                          : "bg-white/5 border border-white/10 hover:bg-white/10"
+                      }`}
                     >
-                      <p className="text-white/70 leading-relaxed">
-                        {faq.answer}
-                      </p>
-                    </motion.div>
-                  </button>
-                </motion.div>
-              ))}
+                      <div className="flex items-center justify-between">
+                        <h3 className="text-lg font-semibold text-white pr-4">
+                          {faq.question}
+                        </h3>
+                        <span
+                          className={`text-2xl text-purple-400 transition-transform duration-300 ${
+                            activeQuestion === index ? "rotate-45" : ""
+                          }`}
+                        >
+                          +
+                        </span>
+                      </div>
+
+                      <motion.div
+                        initial={false}
+                        animate={{
+                          height: activeQuestion === index ? "auto" : 0,
+                          marginTop: activeQuestion === index ? 16 : 0,
+                        }}
+                        transition={{ duration: 0.3 }}
+                        className="overflow-hidden"
+                      >
+                        <p className="text-white/70 leading-relaxed">
+                          {faq.answer}
+                        </p>
+                      </motion.div>
+                    </button>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
         </section>
       </div>
 
