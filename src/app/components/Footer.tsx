@@ -1,5 +1,5 @@
 import Link from "next/link";
-import TimmWordmark from "./TimmWordmark";
+import TimmyWordmark from "./TimmyWordmark";
 
 interface FooterProps {
   light?: boolean;
@@ -20,9 +20,9 @@ const Footer: React.FC<FooterProps> = ({ light }) => {
               href="/"
               className={`text-lg font-semibold ${primaryTextColor} hover:text-[#A093E8] 0 mt-0.5`}
             >
-              <TimmWordmark
+              <TimmyWordmark
                 className={`${primaryTextColor} h-4.5`}
-              ></TimmWordmark>
+              ></TimmyWordmark>
             </Link>
 
             <Link
@@ -75,7 +75,7 @@ const Footer: React.FC<FooterProps> = ({ light }) => {
             </Link>
             {/* Twitter Icon */}
             <Link
-              href="https://x.com/harveenatwal"
+              href="https://x.com/withtimm"
               target="_blank"
               className="hover:text-[#A093E8]"
               aria-label="Twitter"
@@ -92,7 +92,7 @@ const Footer: React.FC<FooterProps> = ({ light }) => {
             </Link>
             {/* Instagram Icon */}
             <Link
-              href="https://instagram.com/timm.so"
+              href="https://instagram.com/timmy.app"
               target="_blank"
               className="hover:text-[#A093E8]"
               aria-label="Instagram"
@@ -131,7 +131,7 @@ const Footer: React.FC<FooterProps> = ({ light }) => {
             </Link>
           </div>
           <p className={`${secondaryTextColor}`}>
-            &copy; 2025 Timm. All rights reserved.
+            &copy; 2025 Timmy. All rights reserved.
           </p>
         </div>
       </div>

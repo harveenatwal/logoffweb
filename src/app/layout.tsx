@@ -17,15 +17,15 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Timm - iPhone App Blocker",
+  title: "Timmy - iPhone App Blocker",
   description:
-    "Easily focus better with Timm. An app blocker specially designed to get back your lost hours. Over 10,000 happy users.",
+    "Easily focus better with Timmy. An app blocker specially designed to get back your lost hours. Over 10,000 happy users.",
   openGraph: {
-    title: "Timm - iPhone App Blocker",
+    title: "Timmy - iPhone App Blocker",
     description:
-      "Easily focus better with Timm. An app blocker specially designed to get back your lost hours. Over 10,000 happy users.",
+      "Easily focus better with Timmy. An app blocker specially designed to get back your lost hours. Over 10,000 happy users.",
     url: "https://www.timm.so",
-    siteName: "Timm",
+    siteName: "Timmy",
     images: [
       {
         url: "https://cdn.timm.so/opengraph_2.png",

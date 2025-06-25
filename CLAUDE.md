@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-FocusPledge (Timm) is a Next.js 15 marketing website for the Timm mobile app - a focus and productivity app that helps users manage screen time through group challenges. The site handles challenge sharing, user onboarding, and deep linking to the mobile app.
+FocusPledge (Timmy) is a Next.js 15 marketing website for the Timmy mobile app - a focus and productivity app that helps users manage screen time through group challenges. The site handles challenge sharing, user onboarding, and deep linking to the mobile app.
 
 ## Development Commands
 
@@ -31,6 +31,7 @@ npm run cf-typegen
 ## Architecture Overview
 
 ### Tech Stack
+
 - **Framework**: Next.js 15.3.1 with React 19 and TypeScript
 - **Runtime**: Cloudflare Pages with Edge Runtime
 - **Database**: Supabase (PostgreSQL) with server-side client
@@ -38,13 +39,16 @@ npm run cf-typegen
 - **UI Components**: Radix UI primitives with shadcn/ui patterns
 
 ### Key Directories
+
 - `/src/app/`: Next.js app router pages and API routes
 - `/src/app/join/[id]/`: Dynamic challenge pages with sharing functionality
 - `/src/lib/supabase/`: Supabase client setup and database types
 - `/src/components/ui/`: Reusable UI components
 
 ### Database Schema
+
 Three main tables in Supabase:
+
 - `profiles`: User data (id, avatar_url, full_name, email, username)
 - `challenges`: Challenge details (id, start_date, end_date, host_profile_id, description, name)
 - `challenge_participants`: Links users to challenges
@@ -57,7 +61,9 @@ Three main tables in Supabase:
 4. **Environment Variables**: Requires `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 
 ### API Routes
+
 - `/api/delete-own-account`: Authenticated endpoint for user account deletion
 
 ### Deployment
+
 The site deploys to Cloudflare Pages. Use `npm run preview` to test locally with Cloudflare's environment before deploying with `npm run deploy`.

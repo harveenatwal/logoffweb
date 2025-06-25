@@ -25,7 +25,7 @@ export default function TermsPage() {
               <ol role="list">
                 <li>Open the <strong>App Store</strong> app on your device.</li>
                 <li>Tap your profile icon at the top right.</li>
-                <li>Select <strong>Purchase History</strong> and find your Timm, previously named Logoff and FocusPledge, purchase or in-app purchase.</li>
+                <li>Select <strong>Purchase History</strong> and find your Timmy, previously named Logoff and FocusPledge, purchase or in-app purchase.</li>
                 <li>Tap <strong>Report a Problem</strong> and choose the reason for your refund request.</li>
                 <li>Follow the on-screen instructions to submit your request.</li>
               </ol>
@@ -57,6 +57,6 @@ export default function TermsPage() {
 
 // Add basic metadata
 export const metadata = {
-  title: "Refund Policy - Timm",
-  description: "Read the Refund Policy for the Timm application and website.",
+  title: "Refund Policy - Timmy",
+  description: "Read the Refund Policy for the Timmy application and website.",
 };

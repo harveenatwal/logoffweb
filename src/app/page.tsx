@@ -104,7 +104,7 @@ export default function Home() {
                 ease: "easeOut",
               }}
             >
-              Improve your concentration and focus. Thousands have with Timm.
+              Improve your concentration and focus. Thousands have with Timmy.
             </motion.p>
             <motion.a
               href="https://apps.apple.com/us/app/timm-app-blocker/id6670452224"
