@@ -10,6 +10,7 @@ import "@/app/purple-body.css";
 
 export default function Home() {
   const [activeFeature, setActiveFeature] = useState(0);
+  const [activeQuestion, setActiveQuestion] = useState<number | null>(0);
 
   const features = [
     {
@@ -35,6 +36,34 @@ export default function Home() {
       description:
         "Monitor your screen time, track weekly improvements, and get insights into your digital habits with comprehensive analytics and progress tracking.",
       image: "https://cdn.timm.so/feature_detailed_analytics.png",
+    },
+  ];
+
+  const faqs = [
+    {
+      question: "How does Timmy actually block apps?",
+      answer:
+        "Timmy uses iOS Screen Time API to create unbreakable app restrictions. Unlike other apps, you can't easily bypass blocks in moments of weakness - they're enforced at the system level.",
+    },
+    {
+      question: "What makes group challenges work?",
+      answer:
+        "Social accountability is powerful. When you join a challenge, your friends can see if you break your commitments. This peer pressure helps you stay on track when willpower alone isn't enough.",
+    },
+    {
+      question: "Can I use Timmy for work and personal time differently?",
+      answer:
+        "Yes! Set location-based rules to block social media at work but allow it at home. Create different schedules for weekdays vs weekends. Timmy adapts to your life.",
+    },
+    {
+      question: "Will Timmy drain my battery?",
+      answer:
+        "No. Timmy is designed to be battery efficient. It only runs when checking app access or updating analytics - not constantly in the background.",
+    },
+    {
+      question: "What if I need to access a blocked app in an emergency?",
+      answer:
+        "You can set up emergency bypass options or cooldown periods. If you need immediate access in a true emergency, you can always reach out to our support team for an emergency code. The key is making it just hard enough that you won't impulsively open apps, but not impossible when truly needed.",
     },
   ];
 
@@ -248,20 +277,15 @@ export default function Home() {
               </div>
             </motion.div>
           </div>
-          {/* <div className="relative justify-center scale-40 lg:scale-70 z-1">
-            <PerspectiveCarousel />
-          </div> */}
           <div className="absolute -bottom-[20%] left-1/2 -translate-x-1/2 w-[130%] h-[40%] bg-black rounded-[50%]"></div>
         </div>
-        {/* <div className="relative">
-          <div className="absolute left-[10%] w-[60%] bottom-75">
-            <div className="gradient-blur"></div>
-          </div>
-        </div> */}
       </div>
 
       {/* What's Included Section */}
-      <section id="features" className="pb-20 lg:pb-32 relative z-20 pt-24 lg:-mt-30 lg:pt-0">
+      <section
+        id="features"
+        className="pb-20 lg:pb-32 relative z-20 pt-24 lg:-mt-30 lg:pt-0"
+      >
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 font-bricolage-grotesque">
@@ -332,6 +356,157 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Perspective Carousel Section */}
+      <div className="relative py-20">
+        <div className="relative flex justify-center scale-40 lg:scale-70">
+          <PerspectiveCarousel />
+        </div>
+        <div className="relative">
+          <div className="absolute left-[10%] w-[60%] bottom-0">
+            <div className="gradient-blur"></div>
+          </div>
+        </div>
+      </div>
+
+      {/* Why Choose Timmy Section */}
+      <section className="py-20 lg:py-32">
+        <div className="container mx-auto px-4 max-w-7xl">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 font-bricolage-grotesque">
+              Why choose Timmy?
+            </h2>
+            <p className="text-lg text-white/70 max-w-2xl mx-auto">
+              Timmy is the most effective app blocker for focus.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
+            {/* Benefit 1 */}
+            <motion.div
+              className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+            >
+              <div className="text-4xl mb-6">🎯</div>
+              <h3 className="text-xl font-bold text-white mb-4">
+                Get deep work done
+              </h3>
+              <p className="text-white/70 leading-relaxed">
+                Block distractions during work hours and actually complete
+                important projects. Users report 3x more productive sessions.
+              </p>
+            </motion.div>
+
+            {/* Benefit 2 */}
+            <motion.div
+              className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <div className="text-4xl mb-6">👥</div>
+              <h3 className="text-xl font-bold text-white mb-4">
+                Stay accountable together
+              </h3>
+              <p className="text-white/70 leading-relaxed">
+                Join challenges with friends and family. When someone tries to
+                break their streak, the group knows - social pressure works.
+              </p>
+            </motion.div>
+
+            {/* Benefit 3 */}
+            <motion.div
+              className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true }}
+            >
+              <div className="text-4xl mb-6">📱</div>
+              <h3 className="text-xl font-bold text-white mb-4">
+                Break phone addiction
+              </h3>
+              <p className="text-white/70 leading-relaxed">
+                Cut your screen time in half with smart blocking that can't be
+                easily bypassed. Average users save 2+ hours daily.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section with Color Blocking */}
+      <div className="max-w-[118rem] px-2 sm:px-5 lg:px-10 w-full">
+        <section className="w-full rounded-4xl relative overflow-hidden bg-gradient-to-br from-purple-900/20 via-purple-800/10 to-transparent">
+        <div className="py-20 lg:py-32">
+          <div className="mx-auto px-4 max-w-4xl">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 font-bricolage-grotesque">
+                Frequently Asked Questions
+              </h2>
+              <p className="text-lg text-white/70">
+                Everything you need to know about Timmy
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              {faqs.map((faq, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="overflow-hidden"
+                >
+                  <button
+                    onClick={() =>
+                      setActiveQuestion(activeQuestion === index ? null : index)
+                    }
+                    className={`w-full text-left p-6 rounded-2xl transition-all duration-300 ${
+                      activeQuestion === index
+                        ? "bg-gradient-to-r from-purple-600/20 to-purple-500/10 border border-purple-500/30"
+                        : "bg-white/5 border border-white/10 hover:bg-white/10"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-lg font-semibold text-white pr-4">
+                        {faq.question}
+                      </h3>
+                      <span
+                        className={`text-2xl text-purple-400 transition-transform duration-300 ${
+                          activeQuestion === index ? "rotate-45" : ""
+                        }`}
+                      >
+                        +
+                      </span>
+                    </div>
+
+                    <motion.div
+                      initial={false}
+                      animate={{
+                        height: activeQuestion === index ? "auto" : 0,
+                        marginTop: activeQuestion === index ? 16 : 0,
+                      }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <p className="text-white/70 leading-relaxed">
+                        {faq.answer}
+                      </p>
+                    </motion.div>
+                  </button>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+        </section>
+      </div>
 
       <div className="container mt-40">
         <Footer />
