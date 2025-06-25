@@ -5,9 +5,39 @@ import Footer from "@/app/components/Footer";
 import PerspectiveCarousel from "@/components/PerspectiveCarousel";
 import Marquee from "@/components/Marquee";
 import { motion } from "framer-motion";
+import { useState } from "react";
 import "@/app/purple-body.css";
 
 export default function Home() {
+  const [activeFeature, setActiveFeature] = useState(0);
+
+  const features = [
+    {
+      title: "Smart App Blocking & Time Limits",
+      description:
+        "Block distracting apps with intelligent rules. Set time limits, schedule blocks, and use location-based restrictions to stay focused when it matters most.",
+      image: "https://cdn.timm.so/feature_block_screen.png",
+    },
+    {
+      title: "Focus Sessions & Productivity Timer",
+      description:
+        "Start focused work sessions with built-in timers. Track your productive time and build consistency with daily focus streaks.",
+      image: "https://cdn.timm.so/feature_focus_session.png",
+    },
+    {
+      title: "Group Challenges & Social Accountability",
+      description:
+        "Join friends and family in group challenges. Share progress, compete on streaks, and stay motivated together with social accountability features.",
+      image: "https://cdn.timm.so/feature_challenge.png",
+    },
+    {
+      title: "Detailed Analytics & Insights",
+      description:
+        "Monitor your screen time, track weekly improvements, and get insights into your digital habits with comprehensive analytics and progress tracking.",
+      image: "https://cdn.timm.so/feature_detailed_analytics.png",
+    },
+  ];
+
   return (
     <div className="min-h-screen h-full flex flex-col bg-black items-center overflow-hidden">
       <div className="h-10">
@@ -29,7 +59,7 @@ export default function Home() {
         </Marquee>
       </div>
       <div className="max-w-[118rem] px-2 sm:px-5 lg:px-10 w-full">
-        <div className="space-background w-full h-[85vh] md:h-[100vh] rounded-4xl relative overflow-visible flex flex-col">
+        <div className="space-background w-full h-[100vh] rounded-4xl relative overflow-visible flex flex-col z-10">
           <div className="flex justify-center">
             <div className="relative h-[24px] w-[24px] md:h-[32px] md:w-[32px]">
               <div
@@ -44,20 +74,13 @@ export default function Home() {
             </div>
             <nav className="py-3 md:py-6 bg-black px-10 rounded-b-4xl">
               <div className="flex justify-center items-center gap-12">
-                {/* <Link
-                  href="#about"
-                  className="text-white text-md md:text-lg font-extrabold hover:text-white/90 transition-colors"
-                  scroll={true}
-                >
-                  About
-                </Link>
                 <Link
                   href="#features"
                   className="text-white text-md md:text-lg font-extrabold hover:text-white/90 transition-colors"
                   scroll={true}
                 >
                   Features
-                </Link> */}
+                </Link>
                 <Link
                   href="/contact"
                   className="text-white text-md md:text-lg font-extrabold hover:text-white/90 transition-colors"
@@ -89,7 +112,9 @@ export default function Home() {
                   ease: "easeOut",
                 }}
               >
-                <span className="text-white text-sm font-medium">Timmy - #1 App Blocker</span>
+                <span className="text-white text-sm font-medium">
+                  Timmy - #1 App Blocker
+                </span>
               </motion.div>
               <motion.div className="overflow-hidden mb-4">
                 <motion.h1
@@ -178,7 +203,8 @@ export default function Home() {
                   ease: "easeOut",
                 }}
               >
-                3-day free trial & 100% money-back guarantee, no questions asked.
+                3-day free trial & 100% money-back guarantee, no questions
+                asked.
               </motion.p>
             </div>
             <motion.div
@@ -196,7 +222,7 @@ export default function Home() {
                   <img
                     src="https://cdn.timm.so/screen_time_before.png"
                     alt="Screen time before"
-                    className="w-48 md:w-64 rounded-3xl"
+                    className="w-48 md:w-80 rounded-3xl"
                   />
                 </div>
                 <svg
@@ -216,7 +242,7 @@ export default function Home() {
                   <img
                     src="https://cdn.timm.so/screen_time_after.png"
                     alt="Screen time after"
-                    className="w-48 md:w-64 rounded-3xl"
+                    className="w-48 md:w-80 rounded-3xl"
                   />
                 </div>
               </div>
@@ -233,6 +259,80 @@ export default function Home() {
           </div>
         </div> */}
       </div>
+
+      {/* What's Included Section */}
+      <section id="features" className="pb-20 lg:pb-32 relative z-20 pt-24 lg:-mt-30 lg:pt-0">
+        <div className="container mx-auto px-4 max-w-7xl">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 font-bricolage-grotesque">
+              What does Timmy include?
+            </h2>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Features List */}
+            <div className="space-y-6 text-left order-2 lg:order-1 flex flex-col items-center md:items-end">
+              {features.map((feature, index) => (
+                <motion.div
+                  key={index}
+                  className={`backdrop-blur-md border rounded-2xl p-6 cursor-pointer transition-all duration-300 w-3/4 relative overflow-hidden ${
+                    index === activeFeature
+                      ? "bg-gradient-to-br from-white/25 via-white/15 to-white/5 border-white/40 shadow-2xl scale-105"
+                      : "bg-gradient-to-br from-white/10 via-white/5 to-white/2 border-white/10 hover:from-white/15 hover:via-white/8 hover:to-white/3"
+                  }`}
+                  onClick={() => setActiveFeature(index)}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  {/* Glass highlight effect */}
+                  <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-white/10 to-transparent pointer-events-none" />
+
+                  <div className="relative z-10">
+                    <h3 className="text-lg font-bold text-white mb-3">
+                      {feature.title}
+                    </h3>
+                    <p className="text-white/70 leading-relaxed text-sm">
+                      {feature.description}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Phone Mockup */}
+            <div className="w-full flex justify-center order-1 lg:order-2">
+              <div className="relative w-full max-w-md">
+                <motion.div
+                  className="w-full h-[600px] lg:h-[750px] flex items-center justify-center lg:scale-125"
+                  key={activeFeature}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <img
+                    src={features[activeFeature].image}
+                    alt={features[activeFeature].title}
+                    className="w-full h-full object-contain"
+                  />
+                </motion.div>
+                {/* Dots indicator */}
+                <div className="flex justify-center mt-6 gap-2">
+                  {features.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setActiveFeature(index)}
+                      className={`w-2 h-2 rounded-full transition-colors ${
+                        index === activeFeature ? "bg-white" : "bg-white/30"
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <div className="container mt-40">
         <Footer />
       </div>
