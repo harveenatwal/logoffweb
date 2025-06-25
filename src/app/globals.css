@@ -39,13 +39,9 @@
   }
 
   .space-background {
-    background-color: rgba(0, 0, 0, 0); 
-    background-image: url('/hero-bg.png');
-    background-origin: padding-box;
-    background-position-x: 50%;
-    background-position-y: 0%;
-    background-repeat: no-repeat;
-    background-size: 700%;
+    position: relative;
+    background: linear-gradient(to bottom right, #000000, #2A1A3E);
+    overflow: hidden;
   }
 }
 
