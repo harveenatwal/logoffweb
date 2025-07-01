@@ -16,7 +16,7 @@ const ShareButton = () => {
         .writeText(window.location.href)
         .then(() => {
           // Success feedback
-          toast("Challenge invite copied to clipboard!");
+          toast("Group invite copied to clipboard!");
         })
         .catch(() => {
           toast.error(

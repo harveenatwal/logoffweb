@@ -70,18 +70,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       error
     );
     return {
-      title: "Challenge Not Found | Timm",
+      title: "Group Not Found | Timmy",
       description:
-        "The challenge you are looking for could not be found. Explore other challenges on Timm.",
+        "The group you are looking for could not be found. Explore other groups on Timmy.",
     };
   }
 
   // Use actual field names from your tables
-  const challengeName = challenge.name || "This Challenge"; // Fallback if name is null
-  const hostName = challenge.host_profile?.full_name || "A Timm User"; // Fallback
+  const challengeName = challenge.name || "This Group"; // Fallback if name is null
+  const hostName = challenge.host_profile?.full_name || "A Timmy User"; // Fallback
 
-  const pageTitle = `${challengeName} by ${hostName} | Timm`;
-  const pageDescription = `You're invited to join '${challengeName}', hosted by ${hostName} on Timm. Master screen time, unlock deeper focus, and achieve your goals together.`;
+  const pageTitle = `${challengeName} by ${hostName} | Timmy`;
+  const pageDescription = `You're invited to join '${challengeName}', hosted by ${hostName} on Timmy. Master screen time, unlock deeper focus, and achieve your goals together.`;
 
   return {
     title: pageTitle,
@@ -90,7 +90,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: pageTitle,
       description: pageDescription,
       url: `/join/${challengeId}`, // Canonical URL for this page
-      siteName: "Timm",
+      siteName: "Timmy",
       images: [
         {
           url: "https://cdn.timm.so/opengraph_2.png",
@@ -169,10 +169,12 @@ const JoinPage = async ({ params }: { params: Promise<{ id: string }> }) => {
                 <h1 className="text-5xl font-serif font-medium text-center text-primary-light mb-8">
                   {challenge.name} {/* Use state data */}
                 </h1>
-                <DateDisplay
-                  startDate={challenge.start_date}
-                  endDate={challenge.end_date}
-                />
+                {!!challenge.end_date && (
+                  <DateDisplay
+                    startDate={challenge.start_date}
+                    endDate={challenge.end_date}
+                  />
+                )}
                 {/* Image placeholder */}
               </div>
             </div>
@@ -238,10 +240,10 @@ const JoinPage = async ({ params }: { params: Promise<{ id: string }> }) => {
               >
                 {/* ... (static content) ... */}
                 <div className="text-primary-light font-serif text-xl">
-                  How challenges work on Timm
+                  How groups work on Timmy
                 </div>
                 <div className="text-secondary-light">
-                  When you join a Timm Challenge, the same app blocking rule get
+                  When you join a Timmy Group, the same app blocking rule get
                   applied to your phone as everyone else in the challenge, all
                   at the same time. It helps everyone stay focused together,
                   knowing you&apos;re all following the same rules during the
@@ -261,25 +263,22 @@ const JoinPage = async ({ params }: { params: Promise<{ id: string }> }) => {
                 <Accordion type="single" collapsible className="w-full">
                   <AccordionItem value="item-1">
                     <AccordionTrigger>
-                      Is this challenge free to join?
+                      Is this group free to join?
                     </AccordionTrigger>
                     <AccordionContent>
-                      Yes! This challenge is completely free to join.
+                      Yes! This group is completely free to join.
                     </AccordionContent>
                   </AccordionItem>
                   <AccordionItem value="item-2">
-                    <AccordionTrigger>
-                      How do I join a challenge?
-                    </AccordionTrigger>
+                    <AccordionTrigger>How do I join a group?</AccordionTrigger>
                     <AccordionContent>
-                      Download the app and follow the prompts to join a
-                      challenge.
+                      Download the app and follow the prompts to join a group.
                     </AccordionContent>
                   </AccordionItem>
                   <AccordionItem value="item-4">
                     <AccordionTrigger>How does the app help?</AccordionTrigger>
                     <AccordionContent>
-                      Timm provides tools to block apps, track your progress,
+                      Timmy provides tools to block apps, track your progress,
                       and connect with others in the challenge.
                     </AccordionContent>
                   </AccordionItem>

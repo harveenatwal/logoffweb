@@ -4,7 +4,7 @@ import Link from "next/link";
 import Footer from "@/app/components/Footer";
 import PerspectiveCarousel from "@/components/PerspectiveCarousel";
 import Marquee from "@/components/Marquee";
-import { motion, useMotionValue, useTransform, PanInfo } from "framer-motion";
+import { motion, PanInfo } from "framer-motion";
 import { useState } from "react";
 import "@/app/purple-body.css";
 
@@ -309,7 +309,7 @@ export default function Home() {
             <div className="w-full flex justify-center order-1 lg:order-2">
               <div className="relative w-full max-w-md overflow-hidden">
                 <motion.div
-                  className="w-full h-[600px] lg:h-[750px] flex items-center justify-center lg:scale-125"
+                  className="w-full h-[600px] lg:h-[750px] flex items-center justify-center lg:scale-125 lg:pointer-events-none"
                   key={activeFeature}
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -321,12 +321,14 @@ export default function Home() {
                     const swipeThreshold = 50;
                     if (info.offset.x > swipeThreshold && activeFeature > 0) {
                       setActiveFeature(activeFeature - 1);
-                    } else if (info.offset.x < -swipeThreshold && activeFeature < features.length - 1) {
+                    } else if (
+                      info.offset.x < -swipeThreshold &&
+                      activeFeature < features.length - 1
+                    ) {
                       setActiveFeature(activeFeature + 1);
                     }
                   }}
                   whileTap={{ cursor: "grabbing" }}
-                  className="lg:pointer-events-none"
                 >
                   <img
                     src={features[activeFeature].image}
